@@ -1,0 +1,118 @@
+.flexDisplay {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.linkHeader {
+  cursor: pointer;
+  text-decoration: none;
+  color: #ffffff;
+  font-size: 20px;
+  font-weight: bold;
+}
+
+.body {
+  width: 100%;
+  height: 100px;
+  background-color: #003b95;
+  position: relative;
+}
+
+.leftContainer {
+  width: 30%;
+}
+
+.linkLeftContainer {
+  font-size: 30px;
+}
+
+.rightContainer {
+  width: 70%;
+  gap: 20px;
+}
+
+.linkRightContainer:hover {
+  border-bottom: 2px solid #ffffff;
+}
+
+.rightContainer button {
+  width: 120px;
+  height: 35px;
+  font-size: 14px;
+  font-weight: bold;
+  cursor: pointer;
+  background-color: #ffffff;
+  color: #006ce4;
+  border: 2px solid #006ce4;
+  border-radius: 3px;
+}
+
+.rightContainer button:hover {
+  background-color: #006ce4;
+  color: #ffffff;
+  border: 2px solid #ffffff;
+}
+
+.responsiveContainer {
+  display: none;
+}
+
+.responsiveContainer svg {
+  cursor: pointer;
+}
+
+.menu {
+  z-index: 999;
+  position: absolute;
+  top: 100px;
+  width: 100%;
+  background-color: #003b95;
+  display: none;
+  flex-direction: column;
+  align-items: center;
+  justify-content: left;
+  padding: 0px 20px;
+  box-sizing: border-box;
+}
+
+.linkMenu {
+  width: 100%;
+  margin: 10px 0px;
+  padding: 5px;
+  box-sizing: border-box;
+}
+
+.linkMenu:hover {
+  background-color: #ffffff;
+  color: #003b95;
+}
+
+@media screen and (max-width: 750px) {
+  .leftContainer {
+    width: 60%;
+  }
+
+  .rightContainer {
+    display: none;
+  }
+
+  .responsiveContainer {
+    display: flex;
+    align-items: center;
+    justify-content: right;
+    padding-right: 50px;
+    box-sizing: border-box;
+    width: 40%;
+  }
+
+  .menu {
+    display: flex;
+  }
+}
+
+@media screen and (max-width: 375px) {
+  .leftContainer {
+    padding-left: 30px;
+  }
+}

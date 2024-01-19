@@ -1,0 +1,75 @@
+.body {
+  width: 100%;
+  background-color: #003b95;
+  padding: 10px 0px 0px 0px;
+}
+
+.containerTop {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 0px 10px;
+  box-sizing: border-box;
+}
+
+.linkFooter {
+  cursor: pointer;
+  text-decoration: none;
+  color: #ffffff;
+  font-size: 40px;
+  font-weight: bold;
+}
+
+.containerTop p {
+  color: #ffffff;
+  font-size: 22px;
+  font-weight: bold;
+  margin: 15px 0px;
+}
+
+.containerIcons {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 25px;
+  margin: 10px 0px;
+}
+
+.containerIcons svg {
+  cursor: pointer;
+}
+
+.containerIcons svg:hover {
+  fill: gray;
+}
+
+.containerBottom {
+  width: 100%;
+  background-color: #00224f;
+  padding: 12px 0px 0px 0px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  text-align: center;
+  color: #ffffff;
+}
+
+.containerBottomParrafo {
+  color: gray;
+  cursor: pointer;
+}
+
+@media screen and (max-width: 450px) {
+  .linkFooter {
+    font-size: 35px;
+  }
+
+  .containerTop p {
+    font-size: 18px;
+  }
+}
