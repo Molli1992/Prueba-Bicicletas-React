@@ -34,7 +34,7 @@ function HomePage() {
           console.log(err);
         });
     }
-  }, []);
+  }, [axiosUrl]);
 
   const onClickLeftArrow = () => {
     if (number === 1) {
