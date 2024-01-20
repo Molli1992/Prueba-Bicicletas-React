@@ -60,7 +60,7 @@ function Header() {
           className={`${styles.linkHeader} ${styles.linkLeftContainer}`}
           to={"/"}
         >
-          Booking.com
+          BikeBazaar.com
         </Link>
       </div>
 

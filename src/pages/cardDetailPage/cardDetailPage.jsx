@@ -32,7 +32,7 @@ function CardDetailPage() {
           });
         });
     }
-  }, []);
+  }, [axiosUrl, card, id]);
 
   const onClickRepair = () => {
     Swal.fire({

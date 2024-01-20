@@ -133,8 +133,13 @@
   }
 }
 
-@media screen and (max-width: 375px) {
+
+@media screen and (max-width: 450px) {
   .leftContainer {
     padding-left: 30px;
+  }
+
+  .linkLeftContainer {
+    font-size: 28px;
   }
 }

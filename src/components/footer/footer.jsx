@@ -30,7 +30,7 @@ function Footer() {
     <div className={styles.body}>
       <div className={styles.containerTop}>
         <Link className={styles.linkFooter} to={"/"}>
-          Booking.com
+          BikeBazaar.com
         </Link>
         <p>Cycle the Extra Mile – Where Every Ride is an Adventure</p>
         <div className={styles.containerIcons}>
@@ -97,7 +97,9 @@ function Footer() {
       </div>
       <div className={styles.containerBottom}>
         <p>Copyrigth ©2024. Designed By</p>
-        <p onClick={onClickGithub} className={styles.containerBottomParrafo}>Molli1992</p>
+        <p onClick={onClickGithub} className={styles.containerBottomParrafo}>
+          Molli1992
+        </p>
       </div>
     </div>
   );
