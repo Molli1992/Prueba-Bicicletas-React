@@ -1,12 +1,19 @@
 import React, { useState, useEffect } from "react";
 import styles from "./homePage.module.css";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 import axiosUrl from "../../axiosUrl.js";
 import Slider from "../../components/slider/slider";
 import CardProducts from "../../components/cardProducts/cardProducts.jsx";
+import ContactUs from "../../components/contactUs/contactUs.jsx";
 
 function HomePage() {
+  const navigate = useNavigate();
   const [products, setProducts] = useState(false);
+  const [filter, setFilter] = useState(false);
+  const [filterActive, setFilterActive] = useState(false);
+  const [cards, setCards] = useState(1);
+  const [number, setNumber] = useState(1);
 
   useEffect(() => {
     if (!products) {
@@ -14,12 +21,56 @@ function HomePage() {
         .get(axiosUrl + "/api/products")
         .then((res) => {
           setProducts(res.data);
+          setFilter(res.data);
         })
         .catch((err) => {
           console.log(err);
         });
     }
   }, []);
+
+  const onClickLeftArrow = () => {
+    if (number === 1) {
+      setNumber(3);
+      setCards(3);
+    } else if (number === 2) {
+      setNumber(1);
+      setCards(1);
+    } else if (number === 3) {
+      setNumber(2);
+      setCards(2);
+    }
+  };
+
+  const onClickRightArrow = () => {
+    if (number === 1) {
+      setNumber(2);
+      setCards(2);
+    } else if (number === 2) {
+      setNumber(3);
+      setCards(3);
+    } else if (number === 3) {
+      setNumber(1);
+      setCards(1);
+    }
+  };
+
+  const handleFilter = (e) => {
+    if (!e.target.value) {
+      setFilterActive(false);
+    } else {
+      setFilterActive(true);
+      setFilter(
+        [...products].filter((i) => {
+          return i.name.toLowerCase().includes(e.target.value.toLowerCase());
+        })
+      );
+    }
+  };
+
+  const onClickCard = (i) => {
+    navigate(`/products/${i.id}`);
+  };
 
   if (products) {
     return (
@@ -29,24 +80,120 @@ function HomePage() {
         <div className={`${styles.containerProducts} ${styles.displayFlex}`}>
           <h1>Find your next bicycle</h1>
 
-          <div className={styles.containerCards}>
-            {products &&
-              products.map((i, index) => {
-                if (index > 20) {
-                  return null;
-                } else {
+          <input placeholder="Search your bicycle..." onChange={handleFilter} />
+
+          {!filterActive ? (
+            <div className={styles.containerCards}>
+              {cards === 1 &&
+                products &&
+                products.map((i, index) => {
+                  console.log(index);
+                  if (index > 5) {
+                    return null;
+                  } else {
+                    return (
+                      <CardProducts
+                        Img={i.img}
+                        Name={i.name}
+                        Year={i.year}
+                        Price={i.price}
+                        OnClick={() => onClickCard(i)}
+                      />
+                    );
+                  }
+                })}
+
+              {cards === 2 &&
+                products &&
+                products.map((i, index) => {
+                  if (index > 5 && index < 12) {
+                    return (
+                      <CardProducts
+                        Img={i.img}
+                        Name={i.name}
+                        Year={i.year}
+                        Price={i.price}
+                        OnClick={(i) => onClickCard(i)}
+                      />
+                    );
+                  } else {
+                    return null;
+                  }
+                })}
+
+              {cards === 3 &&
+                products &&
+                products.map((i, index) => {
+                  if (index > 11) {
+                    return (
+                      <CardProducts
+                        Img={i.img}
+                        Name={i.name}
+                        Year={i.year}
+                        Price={i.price}
+                        OnClick={(i) => onClickCard(i)}
+                      />
+                    );
+                  } else {
+                    return null;
+                  }
+                })}
+            </div>
+          ) : (
+            <div className={styles.containerCards}>
+              {filter &&
+                filter.map((i) => {
                   return (
                     <CardProducts
                       Img={i.img}
                       Name={i.name}
                       Year={i.year}
                       Price={i.price}
+                      OnClick={(i) => onClickCard(i)}
                     />
                   );
-                }
-              })}
-          </div>
+                })}
+            </div>
+          )}
+
+          {!filterActive ? (
+            <div className={styles.containerArrows}>
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="25"
+                height="25"
+                fill="currentColor"
+                class="bi bi-arrow-left"
+                viewBox="0 0 16 16"
+                onClick={onClickLeftArrow}
+              >
+                <path
+                  fill-rule="evenodd"
+                  d="M15 8a.5.5 0 0 0-.5-.5H2.707l3.147-3.146a.5.5 0 1 0-.708-.708l-4 4a.5.5 0 0 0 0 .708l4 4a.5.5 0 0 0 .708-.708L2.707 8.5H14.5A.5.5 0 0 0 15 8"
+                />
+              </svg>
+
+              <p>{number}</p>
+
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="25"
+                height="25"
+                fill="currentColor"
+                class="bi bi-arrow-right"
+                viewBox="0 0 16 16"
+                onClick={onClickRightArrow}
+              >
+                <path
+                  fill-rule="evenodd"
+                  d="M1 8a.5.5 0 0 1 .5-.5h11.793l-3.147-3.146a.5.5 0 0 1 .708-.708l4 4a.5.5 0 0 1 0 .708l-4 4a.5.5 0 0 1-.708-.708L13.293 8.5H1.5A.5.5 0 0 1 1 8"
+                />
+              </svg>
+            </div>
+          ) : null}
         </div>
+
+        <ContactUs />
       </div>
     );
   } else {

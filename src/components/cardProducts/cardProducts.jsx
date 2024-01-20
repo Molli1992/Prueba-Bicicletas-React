@@ -22,7 +22,10 @@ function CardProducts(props) {
           </ul>
         </div>
 
-        <button className={styles.button}>Buy now</button>
+        <div className={styles.containerButtons}>
+          <button className={styles.button}>Add to cart</button>
+          <button className={styles.button} onClick={props.OnClick}>See details</button>
+        </div>
       </div>
     </div>
   );

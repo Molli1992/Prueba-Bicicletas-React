@@ -17,13 +17,61 @@
   flex-direction: column;
   width: 100%;
   padding: 25px 0px;
-  color: #003b95;
+  color: #006ce4;
 }
 
-.containerCards{
-  padding: 20px 0px;
+.containerProducts input {
+  width: 70%;
+  height: 40px;
+  border-radius: 10px;
+  border: 1px solid gray;
+  color: gray;
+  padding: 10px;
+  background-color: #ffffff;
+  margin: 15px 0px;
+}
+
+.containerProducts input:focus {
+  outline: #003b95;
+}
+
+.containerCards {
+  padding: 40px 0px;
   display: grid;
-  grid-template-columns: repeat(3, 1fr); /* Crea tres columnas */
-  gap: 10px; /* Espacio opcional entre los elementos */
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px;
 }
 
+.containerArrows {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+}
+
+.containerArrows p {
+  margin-top: 13px;
+  font-size: 20px;
+}
+
+.containerArrows svg {
+  cursor: pointer;
+}
+
+.containerArrows svg:hover {
+  width: 30px;
+  height: 30px;
+}
+
+@media screen and (max-width: 1050px) {
+  .containerCards {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media screen and (max-width: 700px) {
+  .containerCards {
+    grid-template-columns: repeat(1, 1fr);
+  }
+}

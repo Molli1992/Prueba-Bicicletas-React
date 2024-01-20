@@ -1,0 +1,16 @@
+.body {
+  height: 130vh;
+}
+
+@media screen and (max-width: 992px) {
+  .body {
+    height: 180vh;
+  }
+}
+
+@media screen and (max-width: 765px) {
+    .body {
+      height: 160vh;
+    }
+  }
+  
