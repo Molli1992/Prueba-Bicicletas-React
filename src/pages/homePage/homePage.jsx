@@ -2,13 +2,20 @@ import React, { useState, useEffect } from "react";
 import styles from "./homePage.module.css";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
-import axiosUrl from "../../axiosUrl.js";
 import Slider from "../../components/slider/slider";
 import CardProducts from "../../components/cardProducts/cardProducts.jsx";
 import ContactUs from "../../components/contactUs/contactUs.jsx";
+import Cookies from "universal-cookie";
+import Swal from "sweetalert2";
+import { useDispatch } from "react-redux";
+import { getCarts } from "../../redux/actions/index.js";
 
 function HomePage() {
+  const axiosUrl = process.env.REACT_APP_AXIOS_URL;
+  const cookie = new Cookies();
+  const cookieID = cookie.get("id");
   const navigate = useNavigate();
+  const dispatch = useDispatch();
   const [products, setProducts] = useState(false);
   const [filter, setFilter] = useState(false);
   const [filterActive, setFilterActive] = useState(false);
@@ -68,8 +75,44 @@ function HomePage() {
     }
   };
 
-  const onClickCard = (i) => {
+  const OnClickDetail = (i) => {
     navigate(`/products/${i.id}`);
+  };
+
+  const onClickAddToCart = (i) => {
+    if (!cookieID) {
+      Swal.fire({
+        title: "Error!",
+        text: "You must first login",
+        icon: "error",
+        confirmButtonText: "Ok",
+      });
+    } else {
+      let dataPost = {
+        productID: i.id,
+        userID: cookieID,
+      };
+
+      axios
+        .post(axiosUrl + "/api/cart", dataPost)
+        .then(() => {
+          dispatch(getCarts());
+          Swal.fire({
+            title: "Success!",
+            text: "Product added to cart",
+            icon: "success",
+            confirmButtonText: "Ok",
+          });
+        })
+        .catch((err) => {
+          Swal.fire({
+            title: "Error!",
+            text: "Product selection error try again later",
+            icon: "error",
+            confirmButtonText: "Ok",
+          });
+        });
+    }
   };
 
   if (products) {
@@ -87,7 +130,6 @@ function HomePage() {
               {cards === 1 &&
                 products &&
                 products.map((i, index) => {
-                  console.log(index);
                   if (index > 5) {
                     return null;
                   } else {
@@ -97,7 +139,8 @@ function HomePage() {
                         Name={i.name}
                         Year={i.year}
                         Price={i.price}
-                        OnClick={() => onClickCard(i)}
+                        OnClickDetail={() => OnClickDetail(i)}
+                        OnClickCart={() => onClickAddToCart(i)}
                       />
                     );
                   }
@@ -113,7 +156,8 @@ function HomePage() {
                         Name={i.name}
                         Year={i.year}
                         Price={i.price}
-                        OnClick={(i) => onClickCard(i)}
+                        OnClickDetail={(i) => OnClickDetail(i)}
+                        OnClickCart={() => onClickAddToCart(i)}
                       />
                     );
                   } else {
@@ -131,7 +175,8 @@ function HomePage() {
                         Name={i.name}
                         Year={i.year}
                         Price={i.price}
-                        OnClick={(i) => onClickCard(i)}
+                        OnClickDetail={(i) => OnClickDetail(i)}
+                        OnClickCart={() => onClickAddToCart(i)}
                       />
                     );
                   } else {
@@ -149,7 +194,8 @@ function HomePage() {
                       Name={i.name}
                       Year={i.year}
                       Price={i.price}
-                      OnClick={(i) => onClickCard(i)}
+                      OnClickDetail={(i) => OnClickDetail(i)}
+                      OnClickCart={() => onClickAddToCart(i)}
                     />
                   );
                 })}

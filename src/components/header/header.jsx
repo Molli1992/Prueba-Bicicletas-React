@@ -1,10 +1,24 @@
 import React, { useState } from "react";
 import styles from "./header.module.css";
 import { Link, useNavigate } from "react-router-dom";
+import Cookies from "universal-cookie";
+import { useSelector, useDispatch } from "react-redux";
+import { getCarts } from "../../redux/actions/index.js";
+import Button from "../button/button.jsx";
 
 function Header() {
+  const cart = useSelector((state) => state.cart);
+  const cookie = new Cookies();
+  const cookieID = cookie.get("id");
   const history = useNavigate();
   const [menu, setMenu] = useState(false);
+  const [stateDispatch, setStateDispatch] = useState(false);
+  const dispatch = useDispatch();
+
+  if (cookieID && !stateDispatch) {
+    dispatch(getCarts());
+    setStateDispatch(true);
+  }
 
   const onClickRouteLogin = () => {
     history("/login");
@@ -12,6 +26,23 @@ function Header() {
 
   const onClickRouteSingUp = () => {
     history("/singUp");
+  };
+
+  const onClickRouteProfile = () => {
+    history("/profile");
+  };
+
+  const onClickRouteCart = () => {
+    history("/cart");
+  };
+
+  const logout = () => {
+    document.cookie.split(";").forEach(function (c) {
+      document.cookie = c
+        .replace(/^ +/, "")
+        .replace(/=.*/, "=;expires=" + new Date().toUTCString() + ";path=/");
+      history("/");
+    });
   };
 
   const onClickMenu = () => {
@@ -46,8 +77,36 @@ function Header() {
         >
           Contact Us
         </Link>
-        <button onClick={onClickRouteLogin}>Login</button>
-        <button onClick={onClickRouteSingUp}>Sing Up</button>
+
+        {!cookieID ? (
+          <Button OnClick={onClickRouteLogin} Value="Login" />
+        ) : null}
+        {!cookieID ? (
+          <Button OnClick={onClickRouteSingUp} Value="Sing Up" />
+        ) : null}
+
+        {cookieID ? (
+          <Button OnClick={onClickRouteProfile} Value="Profile" />
+        ) : null}
+        {cookieID ? <Button OnClick={logout} Value="Logout" /> : null}
+
+        {cookieID ? (
+          <div className={styles.containerCart}>
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="30"
+              height="30"
+              fill="#ffffff"
+              class="bi bi-cart"
+              viewBox="0 0 16 16"
+              style={{ cursor: "pointer" }}
+              onClick={onClickRouteCart}
+            >
+              <path d="M0 1.5A.5.5 0 0 1 .5 1H2a.5.5 0 0 1 .485.379L2.89 3H14.5a.5.5 0 0 1 .491.592l-1.5 8A.5.5 0 0 1 13 12H4a.5.5 0 0 1-.491-.408L2.01 3.607 1.61 2H.5a.5.5 0 0 1-.5-.5M3.102 4l1.313 7h8.17l1.313-7zM5 12a2 2 0 1 0 0 4 2 2 0 0 0 0-4m7 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4m-7 1a1 1 0 1 1 0 2 1 1 0 0 1 0-2m7 0a1 1 0 1 1 0 2 1 1 0 0 1 0-2" />
+            </svg>
+            {cart ? <p>{cart.length}</p> : <p>0</p>}
+          </div>
+        ) : null}
       </div>
 
       <div className={`${styles.responsiveContainer}`}>

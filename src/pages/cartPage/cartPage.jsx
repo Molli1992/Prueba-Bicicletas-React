@@ -1,0 +1,56 @@
+import React from "react";
+import styles from "./cartPage.module.css";
+import Swal from "sweetalert2";
+import { useSelector } from "react-redux";
+import Button from "../../components/button/button.jsx";
+
+function CartPage() {
+  const cart = useSelector((state) => state.cart);
+  var count = 0;
+
+  const onClick = () => {
+    Swal.fire({
+      title: "Error!",
+      text: "In repair",
+      icon: "error",
+      confirmButtonText: "Ok",
+    });
+  };
+
+  if (cart) {
+    return (
+      <div className={styles.body}>
+        {cart &&
+          cart.map((i) => {
+            count = count + i.productPrice;
+            console.log(count);
+
+            return (
+              <div class="card" style={{ width: "90%", margin: "10px 0px" }}>
+                <div
+                  class="card-header"
+                  style={{ fontWeight: "bold", fontSize: "30px" }}
+                >
+                  {i.productName}
+                </div>
+                <div class="card-body">
+                  <h5 class="card-title">{i.productDescription}</h5>
+                  <p class="card-text">Price: {i.productPrice}</p>
+                  <button class="btn btn-primary" onClick={onClick}>
+                    Delete
+                  </button>
+                </div>
+              </div>
+            );
+          })}
+
+        <div className={styles.containerButton}>
+          <Button OnClick={onClick} Value="Buy now" />
+          <p>Final price: {count}</p>
+        </div>
+      </div>
+    );
+  }
+}
+
+export default CartPage;

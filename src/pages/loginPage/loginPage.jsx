@@ -1,11 +1,31 @@
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
+import axios from "axios";
+import Cookies from "universal-cookie";
+import { useDispatch } from "react-redux";
+import { getCarts } from "../../redux/actions/index.js";
 
 function LoginPage() {
+  const cookie = new Cookies();
+  const cookieName = cookie.get("name");
   const navigate = useNavigate();
+  const dispatch = useDispatch();
+
+  if (cookieName) {
+    Swal.fire({
+      title: "Error!",
+      text: "You are already logged in",
+      icon: "error",
+      confirmButtonText: "Ok",
+    }).then(() => {
+      navigate("/");
+    });
+  }
+
+  const axiosUrl = process.env.REACT_APP_AXIOS_URL;
   const [login, setLogin] = useState({
-    user: "",
+    email: "",
     password: "",
   });
   const onChange = (e) => {
@@ -16,32 +36,45 @@ function LoginPage() {
   };
 
   const onSubmit = () => {
-    if (true) {
-      Swal.fire({
-        title: "Success!",
-        text: "Te has logeado correctamente!",
-        icon: "success",
-        confirmButtonText: "Ok",
-      }).then(() => {
-        navigate("/");
-        window.scrollTo({
-          top: 0,
-        });
-      });
-    } else {
+    if (login.email.length === 0 || login.password.length === 0) {
       Swal.fire({
         title: "Error!",
-        text: "Usuario o contraseña incorrectos",
+        text: "Complete all fields",
         icon: "error",
         confirmButtonText: "Ok",
       });
+    } else {
+      axios
+        .get(`${axiosUrl}/api/user/${login.email}/${login.password}`)
+        .then((res) => {
+          Swal.fire({
+            title: "Success!",
+            text: "You have successfully logged in!",
+            icon: "success",
+            confirmButtonText: "Ok",
+          }).then(() => {
+            cookie.set("id", res.data.id);
+            cookie.set("email", res.data.email);
+            cookie.set("name", res.data.name);
+            dispatch(getCarts());
+            navigate("/");
+          });
+        })
+        .catch((err) => {
+          Swal.fire({
+            title: "Error!",
+            text: err.message,
+            icon: "error",
+            confirmButtonText: "Ok",
+          });
+        });
     }
   };
 
   const onClick = () => {
     Swal.fire({
       title: "Error!",
-      text: "En reparacion",
+      text: "In repair",
       icon: "error",
       confirmButtonText: "Ok",
     });
@@ -77,9 +110,9 @@ function LoginPage() {
                             type="email"
                             id="form2Example17"
                             class="form-control form-control-lg"
-                            name="user"
+                            name="email"
                             onChange={onChange}
-                            value={login.user}
+                            value={login.email}
                           />
                           <label class="form-label" for="form2Example17">
                             Email

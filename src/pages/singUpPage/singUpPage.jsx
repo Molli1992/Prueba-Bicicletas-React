@@ -1,10 +1,91 @@
 import React, { useState } from "react";
 import styles from "./singUp.module.css";
-import { Link } from "react-router-dom";
-import Swal from "sweetalert2";
 import { useNavigate } from "react-router-dom";
+import axios from "axios";
+import Swal from "sweetalert2";
+import Cookies from "universal-cookie";
 
 function SingUpPage() {
+  const navigate = useNavigate();
+  const cookie = new Cookies();
+  const cookieName = cookie.get("name");
+
+  if (cookieName) {
+    Swal.fire({
+      title: "Error!",
+      text: "You are already logged in",
+      icon: "error",
+      confirmButtonText: "Ok",
+    }).then(() => {
+      navigate("/");
+    });
+  }
+
+  const axiosUrl = process.env.REACT_APP_AXIOS_URL;
+  const [repeatPassword, setReapeatPassword] = useState("");
+  const [user, setUser] = useState({
+    email: "",
+    name: "",
+    password: "",
+  });
+
+  const onChange = (e) => {
+    setUser({
+      ...user,
+      [e.target.name]: e.target.value,
+    });
+  };
+
+  const onChangeRepeatPassword = (e) => {
+    setReapeatPassword(e.target.value);
+  };
+
+  const onSubmit = (e) => {
+    if (
+      user.name.length === 0 ||
+      user.email.length === 0 ||
+      user.password.length === 0 ||
+      repeatPassword.length === 0
+    ) {
+      Swal.fire({
+        title: "Error!",
+        text: "Complete all fields",
+        icon: "error",
+        confirmButtonText: "Ok",
+      });
+    } else if (user.password !== repeatPassword) {
+      Swal.fire({
+        title: "Error!",
+        text: "Password and Repeat your password must be the same",
+        icon: "error",
+        confirmButtonText: "Ok",
+      });
+    } else {
+      axios
+        .post(axiosUrl + "/api/user", user)
+        .then(() => {
+          Swal.fire({
+            title: "Success!",
+            text: "You have registered successfully!",
+            icon: "success",
+            confirmButtonText: "Ok",
+          }).then(() => {
+            navigate("/login");
+          });
+        })
+        .catch((err) => {
+          Swal.fire({
+            title: "Error!",
+            text: err.message,
+            icon: "error",
+            confirmButtonText: "Ok",
+          });
+        });
+    }
+  };
+
+  console.log(user);
+
   return (
     <section class="vh-100" className={styles.body}>
       <div class="container h-100">
@@ -23,6 +104,9 @@ function SingUpPage() {
                         <i class="fas fa-user fa-lg me-3 fa-fw"></i>
                         <div class="form-outline flex-fill mb-0">
                           <input
+                            onChange={onChange}
+                            name="name"
+                            value={user.name}
                             type="text"
                             id="form3Example1c"
                             class="form-control"
@@ -37,6 +121,9 @@ function SingUpPage() {
                         <i class="fas fa-envelope fa-lg me-3 fa-fw"></i>
                         <div class="form-outline flex-fill mb-0">
                           <input
+                            onChange={onChange}
+                            name="email"
+                            value={user.email}
                             type="email"
                             id="form3Example3c"
                             class="form-control"
@@ -51,6 +138,9 @@ function SingUpPage() {
                         <i class="fas fa-lock fa-lg me-3 fa-fw"></i>
                         <div class="form-outline flex-fill mb-0">
                           <input
+                            onChange={onChange}
+                            name="password"
+                            value={user.password}
                             type="password"
                             id="form3Example4c"
                             class="form-control"
@@ -65,6 +155,9 @@ function SingUpPage() {
                         <i class="fas fa-key fa-lg me-3 fa-fw"></i>
                         <div class="form-outline flex-fill mb-0">
                           <input
+                            onChange={onChangeRepeatPassword}
+                            name="repeatPassword"
+                            value={repeatPassword}
                             type="password"
                             id="form3Example4cd"
                             class="form-control"
@@ -75,21 +168,19 @@ function SingUpPage() {
                         </div>
                       </div>
 
-                      <div class="form-check d-flex justify-content-center mb-5">
-                        <input
-                          class="form-check-input me-2"
-                          type="checkbox"
-                          value=""
-                          id="form2Example3c"
-                        />
-                        <label class="form-check-label" for="form2Example3">
-                          I agree all statements in{" "}
-                          <a href="#!">Terms of service</a>
-                        </label>
-                      </div>
-
-                      <div class="d-flex justify-content-center mx-4 mb-3 mb-lg-4">
-                        <button type="button" class="btn btn-primary btn-lg">
+                      <div
+                        style={{
+                          width: "100%",
+                          display: "flex",
+                          justifyContent: "left",
+                        }}
+                      >
+                        <button
+                          style={{ marginLeft: "10px" }}
+                          type="button"
+                          class="btn btn-primary btn-lg"
+                          onClick={onSubmit}
+                        >
                           Register
                         </button>
                       </div>

@@ -23,8 +23,8 @@ function CardProducts(props) {
         </div>
 
         <div className={styles.containerButtons}>
-          <button className={styles.button}>Add to cart</button>
-          <button className={styles.button} onClick={props.OnClick}>See details</button>
+          <button className={styles.button} onClick={props.OnClickCart}>Add to cart</button>
+          <button className={styles.button} onClick={props.OnClickDetail}>See details</button>
         </div>
       </div>
     </div>

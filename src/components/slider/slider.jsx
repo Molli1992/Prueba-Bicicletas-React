@@ -1,34 +1,31 @@
 import React, { useState } from "react";
 import styles from "./slider.module.css";
+import img1 from "../../img/img-1-slider.jpg";
+import img2 from "../../img/img-2-slider.jpg";
+import img3 from "../../img//img-3-slider.jpg";
 
 function Slider() {
-  const [img, setImg] = useState(
-    "https://darpedales.com/wp-content/uploads/2020/01/11133.jpg"
-  );
+  const [img, setImg] = useState(img1);
   const [number, setNumber] = useState(1);
 
   const sliderTimeOut = () => {
     setTimeout(() => {
       if (number === 1) {
-        setImg(
-          "https://www.elconfidencialdigital.com/asset/thumbnail,1280,720,center,center/media/elconfidencialdigital/images/2021/02/22/2021022212191374040.jpg"
-        );
+        setImg(img2);
         setNumber(2);
       }
       if (number === 2) {
-        setImg("https://tuvalum.com/blog/wp-content/uploads/2015/08/mountain-bike-por-el-bosque-1.jpg");
+        setImg(img3);
         setNumber(3);
       }
       if (number === 3) {
-        setImg(
-          "https://darpedales.com/wp-content/uploads/2020/01/11133.jpg"
-        );
+        setImg(img1);
         setNumber(1);
       }
     }, "5000");
   };
 
-  sliderTimeOut()
+  sliderTimeOut();
 
   return (
     <div className={styles.body}>
