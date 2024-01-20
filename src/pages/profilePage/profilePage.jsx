@@ -31,7 +31,7 @@ function ProfilePage() {
           });
         });
     }
-  }, [axiosUrl]);
+  }, [axiosUrl, orders]);
 
   if (!cookieName) {
     Swal.fire({

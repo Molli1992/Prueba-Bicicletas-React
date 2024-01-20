@@ -30,11 +30,16 @@ function HomePage() {
           setProducts(res.data);
           setFilter(res.data);
         })
-        .catch((err) => {
-          console.log(err);
+        .catch(() => {
+          Swal.fire({
+            title: "Error!",
+            text: "Error loading the products, please return later",
+            icon: "error",
+            confirmButtonText: "Ok",
+          });
         });
     }
-  }, [axiosUrl]);
+  }, [axiosUrl, products, filter]);
 
   const onClickLeftArrow = () => {
     if (number === 1) {
