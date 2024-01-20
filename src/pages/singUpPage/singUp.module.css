@@ -4,13 +4,19 @@
 
 @media screen and (max-width: 992px) {
   .body {
-    height: 180vh;
+    height: 160vh;
   }
 }
 
-@media screen and (max-width: 765px) {
+@media screen and (max-width: 520px) {
     .body {
-      height: 160vh;
+      height: 140vh;
+    }
+  }
+
+  @media screen and (max-width: 400px) {
+    .body {
+      height: 130vh;
     }
   }
   

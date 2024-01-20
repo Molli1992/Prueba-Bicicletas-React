@@ -81,7 +81,7 @@ function LoginPage() {
   };
 
   return (
-    <div style={{ marginBottom: "50px", padding: "50px 0px 100px 0px" }}>
+    <div style={{ marginBottom: "50px", paddingBottom: "30px" }}>
       <section class="vh-100">
         <div class="container py-5 h-100">
           <div class="row d-flex justify-content-center align-items-center h-100">
