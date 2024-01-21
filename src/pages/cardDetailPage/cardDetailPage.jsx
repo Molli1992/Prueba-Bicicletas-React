@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import styles from "./cardDetailPage.module.css";
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import axios from "axios";
 import Swal from "sweetalert2";
 import Button from "../../components/button/button.jsx";
@@ -13,6 +13,7 @@ function CardDetailPage() {
   const { id } = useParams();
   const [card, setCard] = useState(false);
   const dispatch = useDispatch();
+  const history = useNavigate();
 
   useEffect(() => {
     if (!card) {
@@ -21,16 +22,18 @@ function CardDetailPage() {
         .then((res) => {
           setCard(res.data);
         })
-        .catch((err) => {
+        .catch(() => {
           Swal.fire({
             title: "Error!",
-            text: err.message,
+            text: "The product does not exist",
             icon: "error",
             confirmButtonText: "Ok",
+          }).then(() => {
+            history("/");
           });
         });
     }
-  }, [axiosUrl, card, id]);
+  }, [axiosUrl, card, id, history, Swal]);
 
   const onClickRepair = () => {
     Swal.fire({
