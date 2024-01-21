@@ -103,7 +103,7 @@ function CardDetailPage() {
     );
   } else {
     return (
-      <div className={styles.body}>
+      <div className={styles.body} style={{ height: "70vh" }}>
         <div class="spinner-border text-primary" role="status"></div>
       </div>
     );

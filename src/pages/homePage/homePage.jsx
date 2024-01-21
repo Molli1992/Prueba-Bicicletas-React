@@ -79,6 +79,7 @@ function HomePage() {
   };
 
   const OnClickDetail = (i) => {
+    window.scroll(0, 0);
     navigate(`/products/${i.id}`);
   };
 
