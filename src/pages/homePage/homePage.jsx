@@ -24,7 +24,7 @@ function HomePage() {
 
   useEffect(() => {
     dispatch(getProducts());
-  }, [products]);
+  }, [products, dispatch]);
 
   const onClickLeftArrow = () => {
     if (number === 1) {
