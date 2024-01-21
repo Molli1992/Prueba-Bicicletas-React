@@ -1,7 +1,6 @@
 import { GET_CART, GET_PRODUCTS } from "./types.js";
 import axios from "axios";
 import Cookies from "universal-cookie";
-import Swal from "sweetalert2";
 
 const axiosUrl = process.env.REACT_APP_AXIOS_URL;
 
