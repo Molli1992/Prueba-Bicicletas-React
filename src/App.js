@@ -10,6 +10,7 @@ import ContactPage from "./pages/contactPage/contactPage";
 import CardDetailPage from "./pages/cardDetailPage/cardDetailPage";
 import ProfilePage from "./pages/profilePage/profilePage";
 import CartPage from "./pages/cartPage/cartPage";
+import AdminPage from "./pages/adminPage/adminPage";
 
 function App() {
   return (
@@ -24,6 +25,7 @@ function App() {
           <Route path="/products/:id" element={<CardDetailPage />} />
           <Route path="/profile" element={<ProfilePage />} />
           <Route path="/cart" element={<CartPage />} />
+          <Route path="/admin" element={<AdminPage />} />
         </Routes>
         <Footer />
       </div>

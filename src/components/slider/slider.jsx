@@ -29,9 +29,12 @@ function Slider() {
 
   return (
     <div className={styles.body}>
-      <img src={img} alt="Error loading IMG" />
-
-      <h1>Ride the Difference - Experience Quality Cycling</h1>
+      <div
+        className={styles.containerImg}
+        style={{ backgroundImage: `url(${img})` }}
+      >
+        <h1>Ride the Difference - Experience Quality Cycling</h1>
+      </div>
     </div>
   );
 }

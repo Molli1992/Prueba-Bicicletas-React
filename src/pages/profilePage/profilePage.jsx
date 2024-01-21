@@ -1,35 +1,11 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import { useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
-import styles from "./profilePage.module.css";
-import axios from "axios";
 
 function ProfilePage() {
   const userEmail = localStorage.getItem("email");
   const userName = localStorage.getItem("name");
   const navigate = useNavigate();
-  const [orders, setOrders] = useState(false);
-  const [stateOrders, setStateOrders] = useState(false);
-  const [valueButton, setValueButton] = useState("See orders");
-  const axiosUrl = process.env.REACT_APP_AXIOS_URL;
-
-  useEffect(() => {
-    if (!orders) {
-      axios
-        .get(axiosUrl + "/api/orders")
-        .then((res) => {
-          setOrders(res.data);
-        })
-        .catch(() => {
-          Swal.fire({
-            title: "Error!",
-            text: "Error loading orders",
-            icon: "error",
-            confirmButtonText: "Ok",
-          });
-        });
-    }
-  }, [axiosUrl, orders]);
 
   if (!userEmail) {
     Swal.fire({
@@ -52,39 +28,9 @@ function ProfilePage() {
     });
   };
 
-  const onClickOrders = () => {
-    if (!stateOrders) {
-      setStateOrders(true);
-      setValueButton("Close orders");
-    } else {
-      setStateOrders(false);
-      setValueButton("See orders");
-    }
+  const onClickRouteAdmin = () => {
+    navigate("/admin");
   };
-
-  const onClickUpdateOrder = (i) => {
-    axios
-      .put(`${axiosUrl}/api/orders/${i.orderId}`)
-      .then((res) => {
-        setOrders(res.data);
-        Swal.fire({
-          title: "Success!",
-          text: "You have successfully removed the order from the table!",
-          icon: "success",
-          confirmButtonText: "Ok",
-        });
-      })
-      .catch((err) => {
-        Swal.fire({
-          title: "Error!",
-          text: err.message,
-          icon: "error",
-          confirmButtonText: "Ok",
-        });
-      });
-  };
-
-  console.log(orders);
 
   return (
     <div>
@@ -104,13 +50,16 @@ function ProfilePage() {
                   <p class="text-muted mb-1">Full Stack Developer</p>
                   <p class="text-muted mb-4">Bay Area, San Francisco, CA</p>
                   <div class="d-flex justify-content-center mb-2">
-                    <button
-                      type="button"
-                      class="btn btn-primary"
-                      onClick={onClickOrders}
-                    >
-                      {valueButton}
-                    </button>
+                    {userEmail === "administrator@gmail.com" ? (
+                      <button
+                        type="button"
+                        class="btn btn-primary"
+                        onClick={onClickRouteAdmin}
+                      >
+                        Admin
+                      </button>
+                    ) : null}
+
                     <button
                       type="button"
                       class="btn btn-outline-primary ms-1"
@@ -175,71 +124,6 @@ function ProfilePage() {
           </div>
         </div>
       </section>
-
-      {stateOrders ? (
-        <div className={styles.containerCard}>
-          {orders &&
-            orders.map((i) => {
-              if (i.status === 0) {
-                return null;
-              } else {
-                return (
-                  <div
-                    class="card"
-                    style={{
-                      width: "95%",
-                      margin: "10px 0px",
-                    }}
-                  >
-                    <div
-                      class="card-header"
-                      style={{
-                        fontWeight: "bold",
-                        fontSize: "30px",
-                        display: "flex",
-                      }}
-                    >
-                      <button
-                        class="btn btn-primary"
-                        onClick={() => onClickUpdateOrder(i)}
-                      >
-                        Delivered
-                      </button>
-                    </div>
-
-                    <div className={styles.cardBody}>
-                      <div className={styles.cardBodyContainer}>
-                        <h5 class="card-title">User:</h5>
-                        <p class="card-text">
-                          Name:{" "}
-                          <span style={{ color: "gray" }}>{i.userName}</span>
-                        </p>
-                        <p class="card-text">
-                          Email:{" "}
-                          <span style={{ color: "gray" }}>{i.email}</span>
-                        </p>
-                      </div>
-
-                      <div className={styles.cardBodyContainer}>
-                        <h5 class="card-title">Product:</h5>
-                        <p class="card-text">
-                          Product:{" "}
-                          <span style={{ color: "gray" }}>
-                            {i.productDescription}
-                          </span>
-                        </p>
-                        <p class="card-text">
-                          Price:{" "}
-                          <span style={{ color: "gray" }}>{i.price}</span>
-                        </p>
-                      </div>
-                    </div>
-                  </div>
-                );
-              }
-            })}
-        </div>
-      ) : null}
     </div>
   );
 }

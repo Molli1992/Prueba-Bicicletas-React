@@ -90,7 +90,7 @@ function CardDetailPage() {
           </div>
           <div className={styles.containerRight}>
             <h1>{card.description}</h1>
-            <h2>Price: {card.price}</h2>
+            <h2>Price: ${card.price}</h2>
             <h2>Year: {card.year}</h2>
             <h2>Use time: {card.time}</h2>
             <p>{card.information}</p>

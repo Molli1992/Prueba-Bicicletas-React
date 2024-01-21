@@ -21,20 +21,22 @@ function HomePage() {
   const userEmail = localStorage.getItem("email");
 
   useEffect(() => {
-    axios
-      .get(axiosUrl + "/api/products")
-      .then((res) => {
-        setProducts(res.data);
-        setFilter(res.data);
-      })
-      .catch((err) => {
-        Swal.fire({
-          title: "Error!",
-          text: err.message,
-          icon: "error",
-          confirmButtonText: "Ok",
+    if (filter === false && products === false) {
+      axios
+        .get(axiosUrl + "/api/products")
+        .then((res) => {
+          setProducts(res.data);
+          setFilter(res.data);
+        })
+        .catch((err) => {
+          Swal.fire({
+            title: "Error!",
+            text: err.message,
+            icon: "error",
+            confirmButtonText: "Ok",
+          });
         });
-      });
+    }
   }, [products, filter, axiosUrl]);
 
   const onClickLeftArrow = () => {

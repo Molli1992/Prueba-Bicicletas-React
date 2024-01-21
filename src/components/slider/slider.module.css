@@ -1,13 +1,15 @@
 .body {
   width: 100%;
   height: 400px;
-  position: relative;
   text-align: center;
 }
 
-.body img {
-  width: 100%;
-  height: 100%;
+.containerImg {
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+  min-height: 60vh;
+  position: relative;
 }
 
 .body h1 {

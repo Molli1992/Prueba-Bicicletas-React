@@ -22,6 +22,7 @@ function Header() {
     "/products/:id",
     "/profile",
     "/cart",
+    "/admin",
   ];
 
   const esRutaPermitida = rutasPermitidas.some((ruta) => {

@@ -18,7 +18,7 @@ function CardProducts(props) {
           <ul>
             <li>{props.Name}</li>
             <li>Year: {props.Year}</li>
-            <li>Price: {props.Price}</li>
+            <li>Price: ${props.Price}</li>
           </ul>
         </div>
 
