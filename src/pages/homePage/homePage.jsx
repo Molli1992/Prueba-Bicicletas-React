@@ -19,6 +19,7 @@ function HomePage() {
   const [cards, setCards] = useState(1);
   const [number, setNumber] = useState(1);
   const storageID = 1;
+   //const storageID = localStorage.getItem("id");
 
   useEffect(() => {
     axios

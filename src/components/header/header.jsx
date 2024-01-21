@@ -8,7 +8,8 @@ import Swal from "sweetalert2";
 
 function Header() {
   const cart = useSelector((state) => state.cart);
-  const storageID = localStorage.getItem("id");
+  const storageID = 1;
+  //const storageID = localStorage.getItem("id");
   const history = useNavigate();
   const [menu, setMenu] = useState(false);
   const dispatch = useDispatch();
