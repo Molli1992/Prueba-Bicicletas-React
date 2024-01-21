@@ -5,12 +5,28 @@ import { useSelector, useDispatch } from "react-redux";
 import { getCarts } from "../../redux/actions/index.js";
 import axios from "axios";
 import Button from "../../components/button/button.jsx";
+import { useNavigate } from "react-router-dom";
 
 function CartPage() {
+  window.scroll(0, 0);
+  const navigate = useNavigate();
+  const userEmail = localStorage.getItem("email");
   const axiosUrl = process.env.REACT_APP_AXIOS_URL;
   const dispatch = useDispatch();
   const cart = useSelector((state) => state.cart);
   var count = 0;
+
+  if (!userEmail) {
+    Swal.fire({
+      title: "Error!",
+      text: "You must first login",
+      icon: "error",
+      confirmButtonText: "Ok",
+    }).then(() => {
+      navigate("/");
+      window.scroll(0, 0);
+    });
+  }
 
   const onClickDeleteCart = (i) => {
     axios
@@ -41,6 +57,28 @@ function CartPage() {
       icon: "error",
       confirmButtonText: "Ok",
     });
+  };
+
+  const onClickCleanCart = () => {
+    axios
+      .delete(`${axiosUrl}/api/allCarts/${userEmail}`)
+      .then(() => {
+        dispatch(getCarts());
+        Swal.fire({
+          title: "Success!",
+          text: "All carts deleted",
+          icon: "success",
+          confirmButtonText: "Ok",
+        });
+      })
+      .catch((err) => {
+        Swal.fire({
+          title: "Error!",
+          text: err.message,
+          icon: "error",
+          confirmButtonText: "Ok",
+        });
+      });
   };
 
   if (cart.length !== 0) {
@@ -74,6 +112,7 @@ function CartPage() {
 
         <div className={styles.containerButton}>
           <Button OnClick={onClick} Value="Buy now" />
+          <Button OnClick={onClickCleanCart} Value="Clean cart" />
           <p>Final price: ${count}</p>
         </div>
       </div>

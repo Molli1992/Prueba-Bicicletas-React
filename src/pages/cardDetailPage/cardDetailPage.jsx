@@ -59,7 +59,6 @@ function CardDetailPage() {
             icon: "success",
             confirmButtonText: "Ok",
           }).then(() => {
-            window.scroll(0, 0);
             history("/cart");
           });
         })

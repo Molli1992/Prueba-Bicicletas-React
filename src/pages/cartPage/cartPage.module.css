@@ -13,29 +13,11 @@
   display: flex;
   align-items: center;
   justify-content: left;
-}
-
-.containerButton button {
-  width: 120px;
-  height: 35px;
-  font-size: 14px;
-  font-weight: bold;
-  cursor: pointer;
-  background-color: #ffffff;
-  color: #006ce4;
-  border: 2px solid #006ce4;
-  border-radius: 3px;
-}
-
-.containerButton button:hover {
-  background-color: #006ce4;
-  color: #ffffff;
-  border: 2px solid #ffffff;
+  gap: 10px;
 }
 
 .containerButton p{
-    font-size: 20px;
+    font-size: 16px;
     color: #006ce4;
     margin-top: 12px;
-    margin-left: 20px;
 }
