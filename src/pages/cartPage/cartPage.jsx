@@ -43,7 +43,7 @@ function CartPage() {
     });
   };
 
-  if (cart) {
+  if (cart.length !== 0) {
     return (
       <div className={styles.body}>
         {cart &&
@@ -74,11 +74,16 @@ function CartPage() {
 
         <div className={styles.containerButton}>
           <Button OnClick={onClick} Value="Buy now" />
-          <p>Final price: {count}</p>
+          <p>Final price: ${count}</p>
         </div>
       </div>
     );
-  }
+  } else
+    return (
+      <div className={styles.body}>
+        <h1>The cart is empty</h1>
+      </div>
+    );
 }
 
 export default CartPage;

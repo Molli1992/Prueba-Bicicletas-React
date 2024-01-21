@@ -35,13 +35,43 @@ function CardDetailPage() {
     }
   }, [axiosUrl, card, id, history]);
 
-  const onClickRepair = () => {
-    Swal.fire({
-      title: "Error!",
-      text: "In repair",
-      icon: "error",
-      confirmButtonText: "Ok",
-    });
+  const onClickRouteCart = async () => {
+    if (!userEmail) {
+      Swal.fire({
+        title: "Error!",
+        text: "You must first login",
+        icon: "error",
+        confirmButtonText: "Ok",
+      });
+    } else {
+      let dataPost = {
+        productID: card.id,
+        userEmail: userEmail,
+      };
+
+      axios
+        .post(axiosUrl + "/api/cart", dataPost)
+        .then(() => {
+          dispatch(getCarts());
+          Swal.fire({
+            title: "Success!",
+            text: "Product added to cart",
+            icon: "success",
+            confirmButtonText: "Ok",
+          }).then(() => {
+            window.scroll(0, 0);
+            history("/cart");
+          });
+        })
+        .catch((err) => {
+          Swal.fire({
+            title: "Error!",
+            text: "Product selection error try again later",
+            icon: "error",
+            confirmButtonText: "Ok",
+          });
+        });
+    }
   };
 
   const onClickAddToCart = () => {
@@ -81,7 +111,6 @@ function CardDetailPage() {
   };
 
   if (card) {
-
     return (
       <div className={styles.body}>
         <div className={styles.cardDetail}>
@@ -95,7 +124,7 @@ function CardDetailPage() {
             <h2>Use time: {card.time}</h2>
             <p>{card.information}</p>
             <div className={styles.buttonsContainer}>
-              <Button OnClick={onClickRepair} Value="Buy now" />
+              <Button OnClick={onClickRouteCart} Value="Buy now" />
               <Button OnClick={onClickAddToCart} Value="Add to cart" />
             </div>
           </div>
