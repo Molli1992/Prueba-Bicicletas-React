@@ -19,15 +19,6 @@ function ProfilePage() {
     });
   }
 
-  const onClickError = () => {
-    Swal.fire({
-      title: "Error!",
-      text: "In repair",
-      icon: "error",
-      confirmButtonText: "Ok",
-    });
-  };
-
   const onClickRouteAdmin = () => {
     navigate("/admin");
   };
