@@ -19,7 +19,7 @@ function Header() {
     if (cookieID) {
       dispatch(getCarts());
     }
-  }, [cart]);
+  }, [cart, cookieID]);
 
   const onClickRouteLogin = () => {
     history("/login");
