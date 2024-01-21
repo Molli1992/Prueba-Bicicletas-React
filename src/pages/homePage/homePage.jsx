@@ -38,7 +38,11 @@ function HomePage() {
   }, [products, filter, axiosUrl]);
 
   const onClickLeftArrow = () => {
-    window.scroll(0, 575);
+    window.scrollTo({
+      top: 575,
+      left: 0,
+      behavior: "smooth",
+    });
     if (number === 1) {
       setNumber(3);
       setCards(3);
@@ -52,7 +56,11 @@ function HomePage() {
   };
 
   const onClickRightArrow = () => {
-    window.scroll(0, 575);
+    window.scrollTo({
+      top: 575,
+      left: 0,
+      behavior: "smooth",
+    });
     if (number === 1) {
       setNumber(2);
       setCards(2);
