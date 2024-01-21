@@ -59,13 +59,6 @@ function ProfilePage() {
                         Admin
                       </button>
                     ) : null}
-                    <button
-                      type="button"
-                      class="btn btn-outline-primary ms-1"
-                      onClick={onClickError}
-                    >
-                      View purchases
-                    </button>
                   </div>
                 </div>
               </div>
