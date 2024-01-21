@@ -9,7 +9,7 @@ import { getCarts } from "../../redux/actions/index.js";
 
 function CardDetailPage() {
   const axiosUrl = process.env.REACT_APP_AXIOS_URL;
-  const storageID = localStorage.getItem("id");
+  const storageID = localStorage.getItem("number");
   const { id } = useParams();
   const [card, setCard] = useState(false);
   const dispatch = useDispatch();
@@ -81,7 +81,7 @@ function CardDetailPage() {
   };
 
   if (card) {
-    console.log(card);
+
     return (
       <div className={styles.body}>
         <div className={styles.cardDetail}>

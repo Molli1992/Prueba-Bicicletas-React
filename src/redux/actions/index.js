@@ -3,7 +3,7 @@ import axios from "axios";
 
 export function getCarts() {
   const axiosUrl = process.env.REACT_APP_AXIOS_URL;
-  const storageID = localStorage.getItem("id");
+  const storageID = localStorage.getItem("number");
 
   return async function (dispatch) {
     let results = await axios.get(`${axiosUrl}/api/cart/${storageID}`);

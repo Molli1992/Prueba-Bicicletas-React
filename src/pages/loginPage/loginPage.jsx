@@ -46,7 +46,7 @@ function LoginPage() {
       axios
         .get(`${axiosUrl}/api/user/${login.email}/${login.password}`)
         .then((res) => {
-          localStorage.setItem("id", res.data.id);
+          localStorage.setItem("number", res.data.id);
           localStorage.setItem("email", res.data.email);
           localStorage.setItem("name", res.data.name);
           Swal.fire({
