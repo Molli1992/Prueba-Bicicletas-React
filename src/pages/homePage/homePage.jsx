@@ -37,7 +37,7 @@ function HomePage() {
           confirmButtonText: "Ok",
         });
       });
-  }, [products, filter]);
+  }, [products, filter, axiosUrl]);
 
   const onClickLeftArrow = () => {
     if (number === 1) {
