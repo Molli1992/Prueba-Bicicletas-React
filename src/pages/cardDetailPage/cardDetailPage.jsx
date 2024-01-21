@@ -33,7 +33,7 @@ function CardDetailPage() {
           });
         });
     }
-  }, [axiosUrl, card, id, history, Swal]);
+  }, [axiosUrl, card, id, history]);
 
   const onClickRepair = () => {
     Swal.fire({
