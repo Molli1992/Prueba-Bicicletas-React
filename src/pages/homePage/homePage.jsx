@@ -7,7 +7,7 @@ import CardProducts from "../../components/cardProducts/cardProducts.jsx";
 import ContactUs from "../../components/contactUs/contactUs.jsx";
 import Cookies from "universal-cookie";
 import Swal from "sweetalert2";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { getCarts } from "../../redux/actions/index.js";
 
 function HomePage() {
@@ -23,10 +23,20 @@ function HomePage() {
   const [number, setNumber] = useState(1);
 
   useEffect(() => {
-    axios.get(axiosUrl + "/api/products").then((res) => {
-      setProducts(res.data);
-      setFilter(res.data);
-    });
+    axios
+      .get(axiosUrl + "/api/products")
+      .then((res) => {
+        setProducts(res.data);
+        setFilter(res.data);
+      })
+      .catch((err) => {
+        Swal.fire({
+          title: "Error!",
+          text: err.message,
+          icon: "error",
+          confirmButtonText: "Ok",
+        });
+      });
   }, [products, filter]);
 
   const onClickLeftArrow = () => {
