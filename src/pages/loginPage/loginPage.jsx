@@ -46,33 +46,19 @@ function LoginPage() {
       axios
         .get(`${axiosUrl}/api/user/${login.email}/${login.password}`)
         .then((res) => {
-          try {
-            localStorage.setItem("id", res.data.id);
-            localStorage.setItem("email", res.data.email);
-            localStorage.setItem("name", res.data.name);
-            Swal.fire({
-              title: "Success!",
-              text: "You have successfully logged in!",
-              icon: "success",
-              confirmButtonText: "Ok",
-            }).then(() => {
-              dispatch(getCarts());
-              navigate("/");
-              window.scroll(0, 0);
-            });
-          } catch (error) {
-            if (
-              error.code === DOMException.QUOTA_EXCEEDED_ERR &&
-              localStorage.length === 0
-            ) {
-              Swal.fire({
-                title: "Error!",
-                text: "It is not possible to store data in your browser",
-                icon: "error",
-                confirmButtonText: "Ok",
-              });
-            }
-          }
+          localStorage.setItem("id", res.data.id);
+          localStorage.setItem("email", res.data.email);
+          localStorage.setItem("name", res.data.name);
+          Swal.fire({
+            title: "Success!",
+            text: "You have successfully logged in!",
+            icon: "success",
+            confirmButtonText: "Ok",
+          }).then(() => {
+            window.scroll(0, 0);
+            dispatch(getCarts());
+            navigate("/");
+          });
         })
         .catch((err) => {
           Swal.fire({
