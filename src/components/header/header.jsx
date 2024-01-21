@@ -5,6 +5,7 @@ import Cookies from "universal-cookie";
 import { useSelector, useDispatch } from "react-redux";
 import { getCarts } from "../../redux/actions/index.js";
 import Button from "../button/button.jsx";
+import Swal from "sweetalert2";
 
 function Header() {
   const cart = useSelector((state) => state.cart);
@@ -41,7 +42,14 @@ function Header() {
       document.cookie = c
         .replace(/^ +/, "")
         .replace(/=.*/, "=;expires=" + new Date().toUTCString() + ";path=/");
-      history("/");
+      Swal.fire({
+        title: "Success!",
+        text: "You have successfully logged out",
+        icon: "success",
+        confirmButtonText: "Ok",
+      }).then(() => {
+        history("/");
+      });
     });
   };
 
@@ -80,15 +88,15 @@ function Header() {
 
         {!cookieID ? (
           <Button OnClick={onClickRouteLogin} Value="Login" />
-        ) : null}
+        ) : (
+          <Button OnClick={onClickRouteProfile} Value="Profile" />
+        )}
+
         {!cookieID ? (
           <Button OnClick={onClickRouteSingUp} Value="Sing Up" />
-        ) : null}
-
-        {cookieID ? (
-          <Button OnClick={onClickRouteProfile} Value="Profile" />
-        ) : null}
-        {cookieID ? <Button OnClick={logout} Value="Logout" /> : null}
+        ) : (
+          <Button OnClick={logout} Value="Logout" />
+        )}
 
         {cookieID ? (
           <div className={styles.containerCart}>
@@ -157,21 +165,43 @@ function Header() {
             Contact Us
           </Link>
 
-          <Link
-            className={`${styles.linkHeader} ${styles.linkMenu}`}
-            to={"/login"}
-            onClick={onClickMenu}
-          >
-            Login
-          </Link>
+          {!cookieID ? (
+            <Link
+              className={`${styles.linkHeader} ${styles.linkMenu}`}
+              to={"/login"}
+              onClick={onClickMenu}
+            >
+              Login
+            </Link>
+          ) : (
+            <Link
+              className={`${styles.linkHeader} ${styles.linkMenu}`}
+              to={"/profile"}
+              onClick={onClickMenu}
+            >
+              Profile
+            </Link>
+          )}
 
-          <Link
-            className={`${styles.linkHeader} ${styles.linkMenu}`}
-            to={"/singUp"}
-            onClick={onClickMenu}
-          >
-            Sing Up
-          </Link>
+          {!cookieID ? (
+            <Link
+              className={`${styles.linkHeader} ${styles.linkMenu}`}
+              to={"/singUp"}
+              onClick={onClickMenu}
+            >
+              Sing Up
+            </Link>
+          ) : (
+            <Link
+              className={`${styles.linkHeader} ${styles.linkMenu}`}
+              onClick={() => {
+                logout();
+                onClickMenu();
+              }}
+            >
+              Logout
+            </Link>
+          )}
         </div>
       ) : null}
     </div>
