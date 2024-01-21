@@ -120,6 +120,7 @@ function HomePage() {
   };
 
   if (products.length !== 0) {
+    window.scroll(0, 0);
     return (
       <div className={styles.body}>
         <Slider />

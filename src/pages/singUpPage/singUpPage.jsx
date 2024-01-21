@@ -92,7 +92,6 @@ function SingUpPage() {
             confirmButtonText: "Ok",
           }).then(() => {
             navigate("/login");
-            window.scroll(0, 0);
           });
         })
         .catch((err) => {

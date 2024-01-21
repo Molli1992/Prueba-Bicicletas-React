@@ -18,7 +18,6 @@ function LoginPage() {
       confirmButtonText: "Ok",
     }).then(() => {
       navigate("/");
-      window.scroll(0, 0);
     });
   }
 

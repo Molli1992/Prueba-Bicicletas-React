@@ -40,7 +40,6 @@ function AdminPage() {
       confirmButtonText: "Ok",
     }).then(() => {
       navigate("/");
-      window.scroll(0, 0);
     });
   } else if (userEmail && userEmail !== "administrator@gmail.com") {
     Swal.fire({
@@ -50,7 +49,6 @@ function AdminPage() {
       confirmButtonText: "Ok",
     }).then(() => {
       navigate("/");
-      window.scroll(0, 0);
     });
   }
 
