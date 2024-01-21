@@ -53,6 +53,10 @@ function Header() {
     history("/cart");
   };
 
+  const onClickRouteHome = () => {
+    history("/");
+  };
+
   const logout = () => {
     localStorage.clear();
     Swal.fire({
@@ -73,10 +77,8 @@ function Header() {
     }
   };
 
-  if (!esRutaPermitida) {
-    history("/");
-  } else {
-    return (
+  return (
+    <div>
       <div className={`${styles.body} ${styles.flexDisplay}`}>
         <div className={`${styles.leftContainer} ${styles.flexDisplay}`}>
           <Link
@@ -241,8 +243,15 @@ function Header() {
           </div>
         ) : null}
       </div>
-    );
-  }
+
+      {esRutaPermitida ? null : (
+        <div className={`${styles.bodyRuotes} ${styles.flexDisplay}`}>
+          <h1>The URL you are entering is not in use</h1>
+          <Button OnClick={onClickRouteHome} Value="Home" />
+        </div>
+      )}
+    </div>
+  );
 }
 
 export default Header;
