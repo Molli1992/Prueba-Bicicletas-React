@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import styles from "./header.module.css";
 import { Link, useNavigate } from "react-router-dom";
 import Cookies from "universal-cookie";
@@ -13,13 +13,13 @@ function Header() {
   const cookieID = cookie.get("id");
   const history = useNavigate();
   const [menu, setMenu] = useState(false);
-  const [stateDispatch, setStateDispatch] = useState(false);
   const dispatch = useDispatch();
 
-  if (cookieID && !stateDispatch) {
-    dispatch(getCarts());
-    setStateDispatch(true);
-  }
+  useEffect(() => {
+    if (cookieID) {
+      dispatch(getCarts());
+    }
+  }, [cart]);
 
   const onClickRouteLogin = () => {
     history("/login");

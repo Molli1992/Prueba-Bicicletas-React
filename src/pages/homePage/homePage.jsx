@@ -7,8 +7,8 @@ import CardProducts from "../../components/cardProducts/cardProducts.jsx";
 import ContactUs from "../../components/contactUs/contactUs.jsx";
 import Cookies from "universal-cookie";
 import Swal from "sweetalert2";
-import { useDispatch } from "react-redux";
-import { getCarts } from "../../redux/actions/index.js";
+import { useDispatch, useSelector } from "react-redux";
+import { getCarts, getProducts } from "../../redux/actions/index.js";
 
 function HomePage() {
   const axiosUrl = process.env.REACT_APP_AXIOS_URL;
@@ -16,30 +16,15 @@ function HomePage() {
   const cookieID = cookie.get("id");
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const [products, setProducts] = useState(false);
-  const [filter, setFilter] = useState(false);
+  const [filter, setFilter] = useState(useSelector((state) => state.products));
   const [filterActive, setFilterActive] = useState(false);
   const [cards, setCards] = useState(1);
   const [number, setNumber] = useState(1);
+  const products = useSelector((state) => state.products);
 
   useEffect(() => {
-    if (!products) {
-      axios
-        .get(axiosUrl + "/api/products")
-        .then((res) => {
-          setProducts(res.data);
-          setFilter(res.data);
-        })
-        .catch(() => {
-          Swal.fire({
-            title: "Error!",
-            text: "Error loading the products, please return later",
-            icon: "error",
-            confirmButtonText: "Ok",
-          });
-        });
-    }
-  }, [axiosUrl, products, filter]);
+    dispatch(getProducts());
+  }, [products]);
 
   const onClickLeftArrow = () => {
     if (number === 1) {
@@ -120,7 +105,7 @@ function HomePage() {
     }
   };
 
-  if (products) {
+  if (products.length !== 0) {
     return (
       <div className={styles.body}>
         <Slider />
