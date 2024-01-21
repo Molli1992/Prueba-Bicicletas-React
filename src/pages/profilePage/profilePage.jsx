@@ -5,8 +5,8 @@ import styles from "./profilePage.module.css";
 import axios from "axios";
 
 function ProfilePage() {
-  const storageName= localStorage.getItem("name");
-  const storageEmail = localStorage.getItem("email");
+  const userEmail = localStorage.getItem("email");
+  const userName = localStorage.getItem("name");
   const navigate = useNavigate();
   const [orders, setOrders] = useState(false);
   const [stateOrders, setStateOrders] = useState(false);
@@ -20,10 +20,10 @@ function ProfilePage() {
         .then((res) => {
           setOrders(res.data);
         })
-        .catch((err) => {
+        .catch(() => {
           Swal.fire({
             title: "Error!",
-            text: err.message,
+            text: "Error loading orders",
             icon: "error",
             confirmButtonText: "Ok",
           });
@@ -31,7 +31,7 @@ function ProfilePage() {
     }
   }, [axiosUrl, orders]);
 
-  if (!storageName) {
+  if (!userEmail) {
     Swal.fire({
       title: "Error!",
       text: "You must first login",
@@ -84,6 +84,8 @@ function ProfilePage() {
       });
   };
 
+  console.log(orders);
+
   return (
     <div>
       <section style={{ backgroundColor: "#eee" }}>
@@ -98,7 +100,7 @@ function ProfilePage() {
                     class="rounded-circle img-fluid"
                     style={{ width: "150px" }}
                   />
-                  <h5 class="my-3">{storageName}</h5>
+                  <h5 class="my-3">{userName}</h5>
                   <p class="text-muted mb-1">Full Stack Developer</p>
                   <p class="text-muted mb-4">Bay Area, San Francisco, CA</p>
                   <div class="d-flex justify-content-center mb-2">
@@ -128,7 +130,7 @@ function ProfilePage() {
                       <p class="mb-0">Full Name</p>
                     </div>
                     <div class="col-sm-9">
-                      <p class="text-muted mb-0">{storageName}</p>
+                      <p class="text-muted mb-0">{userName}</p>
                     </div>
                   </div>
                   <hr />
@@ -137,7 +139,7 @@ function ProfilePage() {
                       <p class="mb-0">Email</p>
                     </div>
                     <div class="col-sm-9">
-                      <p class="text-muted mb-0">{storageEmail}</p>
+                      <p class="text-muted mb-0">{userEmail}</p>
                     </div>
                   </div>
                   <hr />
@@ -209,10 +211,11 @@ function ProfilePage() {
                       <div className={styles.cardBodyContainer}>
                         <h5 class="card-title">User:</h5>
                         <p class="card-text">
-                          Name: <span style={{ color: "gray" }}>{i.name}</span>
+                          Name:
+                          <span style={{ color: "gray" }}>{i.userName}</span>
                         </p>
                         <p class="card-text">
-                          Email:{" "}
+                          Email:
                           <span style={{ color: "gray" }}>{i.email}</span>
                         </p>
                       </div>
@@ -220,15 +223,14 @@ function ProfilePage() {
                       <div className={styles.cardBodyContainer}>
                         <h5 class="card-title">Product:</h5>
                         <p class="card-text">
-                          Product:{" "}
+                          Product:
                           <span style={{ color: "gray" }}>
-                            {" "}
-                            {i.description}
+                            {i.productDescription}
                           </span>
                         </p>
                         <p class="card-text">
-                          Price:{" "}
-                          <span style={{ color: "gray" }}>{i.price}</span>{" "}
+                          Price:
+                          <span style={{ color: "gray" }}>{i.price}</span>
                         </p>
                       </div>
                     </div>

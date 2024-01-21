@@ -6,9 +6,9 @@ import Swal from "sweetalert2";
 
 function SingUpPage() {
   const navigate = useNavigate();
-  const storageName= localStorage.getItem("name");
+  const userName= localStorage.getItem("name");
 
-  if (storageName) {
+  if (userName) {
     Swal.fire({
       title: "Error!",
       text: "You are already logged in",

@@ -8,7 +8,7 @@ import Swal from "sweetalert2";
 
 function Header() {
   const cart = useSelector((state) => state.cart);
-  const storageID = localStorage.getItem("name");
+  const userEmail = localStorage.getItem("email");
   const history = useNavigate();
   const [menu, setMenu] = useState(false);
   const dispatch = useDispatch();
@@ -16,7 +16,7 @@ function Header() {
   const rutasPermitidas = [
     "/",
     "/login",
-    "/signUp",
+    "/singUp",
     "/contactUs",
     "/products/:id",
     "/profile",
@@ -31,13 +31,11 @@ function Header() {
     return location.pathname === ruta;
   });
 
-  const prueba = false;
-
   useEffect(() => {
-    if (storageID && prueba) {
+    if (userEmail) {
       dispatch(getCarts());
     }
-  }, [cart, storageID, dispatch, prueba]);
+  }, [cart, userEmail, dispatch]);
 
   const onClickRouteLogin = () => {
     history("/login");
@@ -105,19 +103,19 @@ function Header() {
             Contact Us
           </Link>
 
-          {!storageID ? (
+          {!userEmail ? (
             <Button OnClick={onClickRouteLogin} Value="Login" />
           ) : (
             <Button OnClick={onClickRouteProfile} Value="Profile" />
           )}
 
-          {!storageID ? (
+          {!userEmail ? (
             <Button OnClick={onClickRouteSingUp} Value="Sing Up" />
           ) : (
             <Button OnClick={logout} Value="Logout" />
           )}
 
-          {storageID ? (
+          {userEmail ? (
             <div className={styles.containerCart}>
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -166,7 +164,7 @@ function Header() {
             </svg>
           )}
 
-          {storageID ? (
+          {userEmail ? (
             <div
               className={styles.containerCart}
               style={{ marginLeft: "10px" }}
@@ -205,7 +203,7 @@ function Header() {
               Contact Us
             </Link>
 
-            {!storageID ? (
+            {!userEmail ? (
               <Link
                 className={`${styles.linkHeader} ${styles.linkMenu}`}
                 to={"/login"}
@@ -223,7 +221,7 @@ function Header() {
               </Link>
             )}
 
-            {!storageID ? (
+            {!userEmail ? (
               <Link
                 className={`${styles.linkHeader} ${styles.linkMenu}`}
                 to={"/singUp"}

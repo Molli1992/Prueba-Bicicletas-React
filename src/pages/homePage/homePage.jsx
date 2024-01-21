@@ -18,7 +18,7 @@ function HomePage() {
   const [filterActive, setFilterActive] = useState(false);
   const [cards, setCards] = useState(1);
   const [number, setNumber] = useState(1);
-  const storageID = localStorage.getItem("name");
+  const userEmail = localStorage.getItem("email");
 
   useEffect(() => {
     axios
@@ -82,7 +82,7 @@ function HomePage() {
   };
 
   const onClickAddToCart = (i) => {
-    if (!storageID) {
+    if (!userEmail) {
       Swal.fire({
         title: "Error!",
         text: "You must first login",
@@ -92,7 +92,7 @@ function HomePage() {
     } else {
       let dataPost = {
         productID: i.id,
-        userID: storageID,
+        userEmail: userEmail,
       };
 
       axios

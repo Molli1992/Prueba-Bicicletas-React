@@ -46,7 +46,6 @@ function LoginPage() {
       axios
         .get(`${axiosUrl}/api/user/${login.email}/${login.password}`)
         .then((res) => {
-          localStorage.setItem("number", res.data.id);
           localStorage.setItem("email", res.data.email);
           localStorage.setItem("name", res.data.name);
           Swal.fire({
@@ -63,7 +62,7 @@ function LoginPage() {
         .catch((err) => {
           Swal.fire({
             title: "Error!",
-            text: err.message,
+            text: "Incorrect username or password",
             icon: "error",
             confirmButtonText: "Ok",
           });

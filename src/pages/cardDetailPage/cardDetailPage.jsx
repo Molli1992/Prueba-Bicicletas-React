@@ -9,7 +9,7 @@ import { getCarts } from "../../redux/actions/index.js";
 
 function CardDetailPage() {
   const axiosUrl = process.env.REACT_APP_AXIOS_URL;
-  const storageID = localStorage.getItem("number");
+  const userEmail = localStorage.getItem("email");
   const { id } = useParams();
   const [card, setCard] = useState(false);
   const dispatch = useDispatch();
@@ -45,7 +45,7 @@ function CardDetailPage() {
   };
 
   const onClickAddToCart = () => {
-    if (!storageID) {
+    if (!userEmail) {
       Swal.fire({
         title: "Error!",
         text: "You must first login",
@@ -55,7 +55,7 @@ function CardDetailPage() {
     } else {
       let dataPost = {
         productID: card.id,
-        userID: storageID,
+        userEmail: userEmail,
       };
 
       axios
