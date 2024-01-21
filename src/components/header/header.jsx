@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import styles from "./header.module.css";
 import { Link, useNavigate, useLocation } from "react-router-dom";
-import { useSelector, useDispatch } from "react-redux";
+import { useSelector } from "react-redux";
 //import { getCarts } from "../../redux/actions/index.js";
 import Button from "../button/button.jsx";
 import Swal from "sweetalert2";
@@ -12,7 +12,7 @@ function Header() {
   //const storageID = localStorage.getItem("id");
   const history = useNavigate();
   const [menu, setMenu] = useState(false);
-  const dispatch = useDispatch();
+  //const dispatch = useDispatch();
   const location = useLocation();
   const rutasPermitidas = [
     "/",
