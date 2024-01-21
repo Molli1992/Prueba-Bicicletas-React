@@ -1,14 +1,12 @@
 import React, { useState, useEffect } from "react";
-import Cookies from "universal-cookie";
 import { useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
 import styles from "./profilePage.module.css";
 import axios from "axios";
 
 function ProfilePage() {
-  const cookie = new Cookies();
-  const cookieName = cookie.get("name");
-  const cookieEmail = cookie.get("email");
+  const storageName= localStorage.getItem("name");
+  const storageEmail = localStorage.getItem("email");
   const navigate = useNavigate();
   const [orders, setOrders] = useState(false);
   const [stateOrders, setStateOrders] = useState(false);
@@ -33,7 +31,7 @@ function ProfilePage() {
     }
   }, [axiosUrl, orders]);
 
-  if (!cookieName) {
+  if (!storageName) {
     Swal.fire({
       title: "Error!",
       text: "You must first login",
@@ -100,7 +98,7 @@ function ProfilePage() {
                     class="rounded-circle img-fluid"
                     style={{ width: "150px" }}
                   />
-                  <h5 class="my-3">{cookieName}</h5>
+                  <h5 class="my-3">{storageName}</h5>
                   <p class="text-muted mb-1">Full Stack Developer</p>
                   <p class="text-muted mb-4">Bay Area, San Francisco, CA</p>
                   <div class="d-flex justify-content-center mb-2">
@@ -130,7 +128,7 @@ function ProfilePage() {
                       <p class="mb-0">Full Name</p>
                     </div>
                     <div class="col-sm-9">
-                      <p class="text-muted mb-0">{cookieName}</p>
+                      <p class="text-muted mb-0">{storageName}</p>
                     </div>
                   </div>
                   <hr />
@@ -139,7 +137,7 @@ function ProfilePage() {
                       <p class="mb-0">Email</p>
                     </div>
                     <div class="col-sm-9">
-                      <p class="text-muted mb-0">{cookieEmail}</p>
+                      <p class="text-muted mb-0">{storageEmail}</p>
                     </div>
                   </div>
                   <hr />

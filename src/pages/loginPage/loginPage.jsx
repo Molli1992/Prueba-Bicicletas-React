@@ -2,17 +2,15 @@ import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
 import axios from "axios";
-import Cookies from "universal-cookie";
 import { useDispatch } from "react-redux";
 import { getCarts } from "../../redux/actions/index.js";
 
 function LoginPage() {
-  const cookie = new Cookies();
-  const cookieName = cookie.get("name");
   const navigate = useNavigate();
   const dispatch = useDispatch();
+  const storageName = localStorage.getItem('name');
 
-  if (cookieName) {
+  if (storageName) {
     Swal.fire({
       title: "Error!",
       text: "You are already logged in",
@@ -48,9 +46,9 @@ function LoginPage() {
       axios
         .get(`${axiosUrl}/api/user/${login.email}/${login.password}`)
         .then((res) => {
-          cookie.set("id", res.data.id);
-          cookie.set("email", res.data.email);
-          cookie.set("name", res.data.name);
+          localStorage.setItem("id", res.data.id);
+          localStorage.setItem("email", res.data.email);
+          localStorage.setItem("name", res.data.name);
           Swal.fire({
             title: "Success!",
             text: "You have successfully logged in!",

@@ -5,15 +5,12 @@ import { useNavigate } from "react-router-dom";
 import Slider from "../../components/slider/slider";
 import CardProducts from "../../components/cardProducts/cardProducts.jsx";
 import ContactUs from "../../components/contactUs/contactUs.jsx";
-import Cookies from "universal-cookie";
 import Swal from "sweetalert2";
 import { useDispatch } from "react-redux";
 import { getCarts } from "../../redux/actions/index.js";
 
 function HomePage() {
   const axiosUrl = process.env.REACT_APP_AXIOS_URL;
-  const cookie = new Cookies();
-  const cookieID = cookie.get("id");
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const [filter, setFilter] = useState(false);
@@ -21,6 +18,7 @@ function HomePage() {
   const [filterActive, setFilterActive] = useState(false);
   const [cards, setCards] = useState(1);
   const [number, setNumber] = useState(1);
+  const storageID = localStorage.getItem("id");
 
   useEffect(() => {
     axios
@@ -84,7 +82,7 @@ function HomePage() {
   };
 
   const onClickAddToCart = (i) => {
-    if (!cookieID) {
+    if (!storageID) {
       Swal.fire({
         title: "Error!",
         text: "You must first login",
@@ -94,7 +92,7 @@ function HomePage() {
     } else {
       let dataPost = {
         productID: i.id,
-        userID: cookieID,
+        userID: storageID,
       };
 
       axios

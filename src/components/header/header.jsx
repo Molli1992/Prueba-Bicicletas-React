@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import styles from "./header.module.css";
 import { Link, useNavigate } from "react-router-dom";
-import Cookies from "universal-cookie";
 import { useSelector, useDispatch } from "react-redux";
 import { getCarts } from "../../redux/actions/index.js";
 import Button from "../button/button.jsx";
@@ -9,17 +8,16 @@ import Swal from "sweetalert2";
 
 function Header() {
   const cart = useSelector((state) => state.cart);
-  const cookie = new Cookies();
-  const cookieID = cookie.get("id");
+  const storageID = localStorage.getItem("id");
   const history = useNavigate();
   const [menu, setMenu] = useState(false);
   const dispatch = useDispatch();
 
   useEffect(() => {
-    if (cookieID) {
+    if (storageID) {
       dispatch(getCarts());
     }
-  }, [cart, cookieID, dispatch]);
+  }, [cart, storageID, dispatch]);
 
   const onClickRouteLogin = () => {
     history("/login");
@@ -38,18 +36,14 @@ function Header() {
   };
 
   const logout = () => {
-    document.cookie.split(";").forEach(function (c) {
-      document.cookie = c
-        .replace(/^ +/, "")
-        .replace(/=.*/, "=;expires=" + new Date().toUTCString() + ";path=/");
-      Swal.fire({
-        title: "Success!",
-        text: "You have successfully logged out",
-        icon: "success",
-        confirmButtonText: "Ok",
-      }).then(() => {
-        history("/");
-      });
+    localStorage.clear();
+    Swal.fire({
+      title: "Success!",
+      text: "You have successfully logged out",
+      icon: "success",
+      confirmButtonText: "Ok",
+    }).then(() => {
+      history("/");
     });
   };
 
@@ -86,19 +80,19 @@ function Header() {
           Contact Us
         </Link>
 
-        {!cookieID ? (
+        {!storageID ? (
           <Button OnClick={onClickRouteLogin} Value="Login" />
         ) : (
           <Button OnClick={onClickRouteProfile} Value="Profile" />
         )}
 
-        {!cookieID ? (
+        {!storageID ? (
           <Button OnClick={onClickRouteSingUp} Value="Sing Up" />
         ) : (
           <Button OnClick={logout} Value="Logout" />
         )}
 
-        {cookieID ? (
+        {storageID ? (
           <div className={styles.containerCart}>
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -147,8 +141,8 @@ function Header() {
           </svg>
         )}
 
-        {cookieID ? (
-          <div className={styles.containerCart} style={{marginLeft: "10px"}}>
+        {storageID ? (
+          <div className={styles.containerCart} style={{ marginLeft: "10px" }}>
             <svg
               xmlns="http://www.w3.org/2000/svg"
               width="30"
@@ -183,7 +177,7 @@ function Header() {
             Contact Us
           </Link>
 
-          {!cookieID ? (
+          {!storageID ? (
             <Link
               className={`${styles.linkHeader} ${styles.linkMenu}`}
               to={"/login"}
@@ -201,7 +195,7 @@ function Header() {
             </Link>
           )}
 
-          {!cookieID ? (
+          {!storageID ? (
             <Link
               className={`${styles.linkHeader} ${styles.linkMenu}`}
               to={"/singUp"}

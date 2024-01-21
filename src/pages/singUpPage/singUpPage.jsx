@@ -3,14 +3,12 @@ import styles from "./singUp.module.css";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import Swal from "sweetalert2";
-import Cookies from "universal-cookie";
 
 function SingUpPage() {
   const navigate = useNavigate();
-  const cookie = new Cookies();
-  const cookieName = cookie.get("name");
+  const storageName= localStorage.getItem("name");
 
-  if (cookieName) {
+  if (storageName) {
     Swal.fire({
       title: "Error!",
       text: "You are already logged in",
@@ -85,8 +83,6 @@ function SingUpPage() {
         });
     }
   };
-
-  console.log(user);
 
   return (
     <section class="vh-100" className={styles.body}>

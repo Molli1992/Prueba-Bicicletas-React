@@ -23,7 +23,6 @@ function CartPage() {
         {cart &&
           cart.map((i) => {
             count = count + i.productPrice;
-            console.log(count);
 
             return (
               <div class="card" style={{ width: "90%", margin: "10px 0px" }}>

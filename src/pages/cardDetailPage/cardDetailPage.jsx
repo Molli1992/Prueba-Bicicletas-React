@@ -4,17 +4,15 @@ import { useParams } from "react-router-dom";
 import axios from "axios";
 import Swal from "sweetalert2";
 import Button from "../../components/button/button.jsx";
-import Cookies from "universal-cookie";
 import { useDispatch } from "react-redux";
 import { getCarts } from "../../redux/actions/index.js";
 
 function CardDetailPage() {
   const axiosUrl = process.env.REACT_APP_AXIOS_URL;
+  const storageID = localStorage.getItem("id");
   const { id } = useParams();
   const [card, setCard] = useState(false);
   const dispatch = useDispatch();
-  const cookie = new Cookies();
-  const cookieID = cookie.get("id");
 
   useEffect(() => {
     if (!card) {
@@ -44,7 +42,7 @@ function CardDetailPage() {
   };
 
   const onClickAddToCart = () => {
-    if (!cookieID) {
+    if (!storageID) {
       Swal.fire({
         title: "Error!",
         text: "You must first login",
@@ -54,7 +52,7 @@ function CardDetailPage() {
     } else {
       let dataPost = {
         productID: card.id,
-        userID: cookieID,
+        userID: storageID,
       };
 
       axios
