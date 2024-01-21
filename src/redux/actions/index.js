@@ -1,10 +1,9 @@
-import { GET_CART, GET_PRODUCTS } from "./types.js";
+import { GET_CART } from "./types.js";
 import axios from "axios";
 import Cookies from "universal-cookie";
 
-const axiosUrl = process.env.REACT_APP_AXIOS_URL;
-
 export function getCarts() {
+  const axiosUrl = process.env.REACT_APP_AXIOS_URL;
   const cookie = new Cookies();
   const cookieID = cookie.get("id");
 
@@ -13,17 +12,6 @@ export function getCarts() {
 
     return dispatch({
       type: GET_CART,
-      payload: results.data,
-    });
-  };
-}
-
-export function getProducts() {
-  return async function (dispatch) {
-    let results = await axios.get(axiosUrl + "/api/products");
-
-    return dispatch({
-      type: GET_PRODUCTS,
       payload: results.data,
     });
   };

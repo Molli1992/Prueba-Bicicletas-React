@@ -1,8 +1,7 @@
-import { GET_CART, GET_PRODUCTS } from "../actions/types.js";
+import { GET_CART } from "../actions/types.js";
 
 const initialState = {
   cart: [],
-  products: [],
 };
 
 const rootReducer = (state = initialState, action) => {
@@ -11,12 +10,6 @@ const rootReducer = (state = initialState, action) => {
       return {
         ...state,
         cart: action.payload,
-      };
-
-    case GET_PRODUCTS:
-      return {
-        ...state,
-        products: action.payload,
       };
 
     default:
