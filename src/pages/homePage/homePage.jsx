@@ -8,7 +8,7 @@ import ContactUs from "../../components/contactUs/contactUs.jsx";
 import Cookies from "universal-cookie";
 import Swal from "sweetalert2";
 import { useDispatch, useSelector } from "react-redux";
-import { getCarts, getProducts } from "../../redux/actions/index.js";
+import { getCarts } from "../../redux/actions/index.js";
 
 function HomePage() {
   const axiosUrl = process.env.REACT_APP_AXIOS_URL;
@@ -16,15 +16,18 @@ function HomePage() {
   const cookieID = cookie.get("id");
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const [filter, setFilter] = useState(useSelector((state) => state.products));
+  const [filter, setFilter] = useState(false);
+  const [products, setProducts] = useState(false);
   const [filterActive, setFilterActive] = useState(false);
   const [cards, setCards] = useState(1);
   const [number, setNumber] = useState(1);
-  const products = useSelector((state) => state.products);
 
   useEffect(() => {
-    dispatch(getProducts());
-  }, [products, dispatch]);
+    axios.get(axiosUrl + "/api/products").then((res) => {
+      setProducts(res.data);
+      setFilter(res.data);
+    });
+  }, [products, filter]);
 
   const onClickLeftArrow = () => {
     if (number === 1) {
