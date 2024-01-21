@@ -20,6 +20,7 @@ function LoginPage() {
       confirmButtonText: "Ok",
     }).then(() => {
       navigate("/");
+      window.scroll(0, 0);
     });
   }
 
@@ -58,6 +59,7 @@ function LoginPage() {
             cookie.set("name", res.data.name);
             dispatch(getCarts());
             navigate("/");
+            window.scroll(0, 0);
           });
         })
         .catch((err) => {

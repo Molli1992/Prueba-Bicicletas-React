@@ -26,10 +26,14 @@ function Footer() {
     window.open("https://api.whatsapp.com/send?phone=5491124586710", "_blank");
   };
 
+  const onClickScroll = () => {
+    window.scroll(0, 0);
+  };
+
   return (
     <div className={styles.body}>
       <div className={styles.containerTop}>
-        <Link className={styles.linkFooter} to={"/"}>
+        <Link className={styles.linkFooter} to={"/"} onClick={onClickScroll}>
           BikeBazaar.com
         </Link>
         <p>Cycle the Extra Mile – Where Every Ride is an Adventure</p>
