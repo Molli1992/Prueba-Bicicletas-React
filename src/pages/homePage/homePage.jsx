@@ -20,6 +20,8 @@ function HomePage() {
   const [number, setNumber] = useState(1);
   const storageID = null;
   //const storageID = localStorage.getItem("id");
+  const storageName = localStorage.getItem("name");
+  console.log(storageName)
 
   useEffect(() => {
     axios
