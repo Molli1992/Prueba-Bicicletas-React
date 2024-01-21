@@ -211,11 +211,11 @@ function ProfilePage() {
                       <div className={styles.cardBodyContainer}>
                         <h5 class="card-title">User:</h5>
                         <p class="card-text">
-                          Name:
+                          Name:{" "}
                           <span style={{ color: "gray" }}>{i.userName}</span>
                         </p>
                         <p class="card-text">
-                          Email:
+                          Email:{" "}
                           <span style={{ color: "gray" }}>{i.email}</span>
                         </p>
                       </div>
@@ -223,13 +223,13 @@ function ProfilePage() {
                       <div className={styles.cardBodyContainer}>
                         <h5 class="card-title">Product:</h5>
                         <p class="card-text">
-                          Product:
+                          Product:{" "}
                           <span style={{ color: "gray" }}>
                             {i.productDescription}
                           </span>
                         </p>
                         <p class="card-text">
-                          Price:
+                          Price:{" "}
                           <span style={{ color: "gray" }}>{i.price}</span>
                         </p>
                       </div>
