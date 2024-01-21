@@ -48,15 +48,15 @@ function LoginPage() {
       axios
         .get(`${axiosUrl}/api/user/${login.email}/${login.password}`)
         .then((res) => {
+          cookie.set("id", res.data.id);
+          cookie.set("email", res.data.email);
+          cookie.set("name", res.data.name);
           Swal.fire({
             title: "Success!",
             text: "You have successfully logged in!",
             icon: "success",
             confirmButtonText: "Ok",
           }).then(() => {
-            cookie.set("id", res.data.id);
-            cookie.set("email", res.data.email);
-            cookie.set("name", res.data.name);
             dispatch(getCarts());
             navigate("/");
             window.scroll(0, 0);
