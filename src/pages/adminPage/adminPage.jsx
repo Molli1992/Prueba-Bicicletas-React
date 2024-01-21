@@ -72,128 +72,140 @@ function AdminPage() {
     }
   }, [axiosUrl, orders]);
 
-  return (
-    <div className={styles.bodyAdmin}>
-      <h1>Undelivered orders:</h1>
-      <div className={styles.containerCard}>
-        {orders &&
-          orders.map((i) => {
-            if (i.status === 0) {
-              return null;
-            } else {
-              return (
-                <div
-                  class="card"
-                  style={{
-                    width: "95%",
-                    margin: "10px 0px",
-                  }}
-                >
+  if (orders) {
+    return (
+      <div className={styles.bodyAdmin}>
+        <h1>Undelivered orders:</h1>
+        <div className={styles.containerCard}>
+          {orders &&
+            orders.map((i) => {
+              if (i.status === 0) {
+                return null;
+              } else {
+                return (
                   <div
-                    class="card-header"
+                    class="card"
                     style={{
-                      fontWeight: "bold",
-                      fontSize: "30px",
-                      display: "flex",
+                      width: "95%",
+                      margin: "10px 0px",
                     }}
                   >
-                    <button
-                      class="btn btn-primary"
-                      onClick={() => onClickUpdateOrder(i)}
+                    <div
+                      class="card-header"
+                      style={{
+                        fontWeight: "bold",
+                        fontSize: "30px",
+                        display: "flex",
+                      }}
                     >
-                      Deliver
-                    </button>
-                  </div>
-
-                  <div className={styles.cardBody}>
-                    <div className={styles.cardBodyContainer}>
-                      <h5 class="card-title">User:</h5>
-                      <p class="card-text">
-                        Name:{" "}
-                        <span style={{ color: "gray" }}>{i.userName}</span>
-                      </p>
-                      <p class="card-text">
-                        Email: <span style={{ color: "gray" }}>{i.email}</span>
-                      </p>
+                      <button
+                        class="btn btn-primary"
+                        onClick={() => onClickUpdateOrder(i)}
+                      >
+                        Deliver
+                      </button>
                     </div>
 
-                    <div className={styles.cardBodyContainer}>
-                      <h5 class="card-title">Product:</h5>
-                      <p class="card-text">
-                        Product:{" "}
-                        <span style={{ color: "gray" }}>
-                          {i.productDescription}
-                        </span>
-                      </p>
-                      <p class="card-text">
-                        Price: <span style={{ color: "gray" }}>{i.price}</span>
-                      </p>
+                    <div className={styles.cardBody}>
+                      <div className={styles.cardBodyContainer}>
+                        <h5 class="card-title">User:</h5>
+                        <p class="card-text">
+                          Name:{" "}
+                          <span style={{ color: "gray" }}>{i.userName}</span>
+                        </p>
+                        <p class="card-text">
+                          Email:{" "}
+                          <span style={{ color: "gray" }}>{i.email}</span>
+                        </p>
+                      </div>
+
+                      <div className={styles.cardBodyContainer}>
+                        <h5 class="card-title">Product:</h5>
+                        <p class="card-text">
+                          Product:{" "}
+                          <span style={{ color: "gray" }}>
+                            {i.productDescription}
+                          </span>
+                        </p>
+                        <p class="card-text">
+                          Price:{" "}
+                          <span style={{ color: "gray" }}>{i.price}</span>
+                        </p>
+                      </div>
                     </div>
                   </div>
-                </div>
-              );
-            }
-          })}
-      </div>
+                );
+              }
+            })}
+        </div>
 
-      <h1>Orders delivered:</h1>
-      <div className={styles.containerCard}>
-        {orders &&
-          orders.map((i) => {
-            if (i.status === 1) {
-              return null;
-            } else {
-              return (
-                <div
-                  class="card"
-                  style={{
-                    width: "95%",
-                    margin: "10px 0px",
-                  }}
-                >
+        <h1>Orders delivered:</h1>
+        <div className={styles.containerCard}>
+          {orders &&
+            orders.map((i) => {
+              if (i.status === 1) {
+                return null;
+              } else {
+                return (
                   <div
-                    class="card-header"
+                    class="card"
                     style={{
-                      fontWeight: "bold",
-                      fontSize: "30px",
-                      display: "flex",
+                      width: "95%",
+                      margin: "10px 0px",
                     }}
                   >
-                    <h2>Delivered</h2>
-                  </div>
-
-                  <div className={styles.cardBody}>
-                    <div className={styles.cardBodyContainer}>
-                      <h5 class="card-title">User:</h5>
-                      <p class="card-text">
-                        Name:{" "}
-                        <span style={{ color: "gray" }}>{i.userName}</span>
-                      </p>
-                      <p class="card-text">
-                        Email: <span style={{ color: "gray" }}>{i.email}</span>
-                      </p>
+                    <div
+                      class="card-header"
+                      style={{
+                        fontWeight: "bold",
+                        fontSize: "30px",
+                        display: "flex",
+                      }}
+                    >
+                      <h2>Delivered</h2>
                     </div>
 
-                    <div className={styles.cardBodyContainer}>
-                      <h5 class="card-title">Product:</h5>
-                      <p class="card-text">
-                        Product:{" "}
-                        <span style={{ color: "gray" }}>
-                          {i.productDescription}
-                        </span>
-                      </p>
-                      <p class="card-text">
-                        Price: <span style={{ color: "gray" }}>{i.price}</span>
-                      </p>
+                    <div className={styles.cardBody}>
+                      <div className={styles.cardBodyContainer}>
+                        <h5 class="card-title">User:</h5>
+                        <p class="card-text">
+                          Name:{" "}
+                          <span style={{ color: "gray" }}>{i.userName}</span>
+                        </p>
+                        <p class="card-text">
+                          Email:{" "}
+                          <span style={{ color: "gray" }}>{i.email}</span>
+                        </p>
+                      </div>
+
+                      <div className={styles.cardBodyContainer}>
+                        <h5 class="card-title">Product:</h5>
+                        <p class="card-text">
+                          Product:{" "}
+                          <span style={{ color: "gray" }}>
+                            {i.productDescription}
+                          </span>
+                        </p>
+                        <p class="card-text">
+                          Price:{" "}
+                          <span style={{ color: "gray" }}>{i.price}</span>
+                        </p>
+                      </div>
                     </div>
                   </div>
-                </div>
-              );
-            }
-          })}
+                );
+              }
+            })}
+        </div>
       </div>
-    </div>
-  );
+    );
+  } else {
+    return (
+      <div className={styles.bodyLoader}>
+        <div class="spinner-border text-primary" role="status"></div>
+      </div>
+    );
+  }
 }
 
 export default AdminPage;
