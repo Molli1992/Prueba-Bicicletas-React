@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import styles from "./header.module.css";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useNavigate, useLocation } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { getCarts } from "../../redux/actions/index.js";
 import Button from "../button/button.jsx";
@@ -12,6 +12,28 @@ function Header() {
   const history = useNavigate();
   const [menu, setMenu] = useState(false);
   const dispatch = useDispatch();
+  const location = useLocation();
+  const rutasPermitidas = [
+    "/",
+    "/login",
+    "/signUp",
+    "/contactUs",
+    "/products/:id",
+    "/profile",
+    "/cart",
+  ];
+
+  const esRutaPermitida = rutasPermitidas.some((ruta) => {
+    if (ruta.includes(":")) {
+      const baseRuta = ruta.split("/:")[0];
+      return location.pathname.includes(baseRuta);
+    }
+    return location.pathname === ruta;
+  });
+
+  if (!esRutaPermitida) {
+    history("/");
+  }
 
   useEffect(() => {
     if (storageID) {
