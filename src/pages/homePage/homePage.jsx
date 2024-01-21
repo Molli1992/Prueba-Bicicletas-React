@@ -18,7 +18,7 @@ function HomePage() {
   const [filterActive, setFilterActive] = useState(false);
   const [cards, setCards] = useState(1);
   const [number, setNumber] = useState(1);
-  const storageID = localStorage.getItem("id");
+  const storageID = 1;
 
   useEffect(() => {
     axios
