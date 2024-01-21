@@ -1,15 +1,18 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import styles from "./header.module.css";
 import { Link, useNavigate, useLocation } from "react-router-dom";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
+import { getCarts } from "../../redux/actions/index.js";
 import Button from "../button/button.jsx";
 import Swal from "sweetalert2";
 
 function Header() {
+  const dispatch = useDispatch();
   const cart = useSelector((state) => state.cart);
   const userEmail = localStorage.getItem("email");
   const history = useNavigate();
   const [menu, setMenu] = useState(false);
+  const [cartRefresh, setCartRefresh] = useState(false);
   const location = useLocation();
   const rutasPermitidas = [
     "/",
@@ -28,6 +31,13 @@ function Header() {
     }
     return location.pathname === ruta;
   });
+
+  useEffect(() => {
+    if (!cartRefresh) {
+      dispatch(getCarts());
+      setCartRefresh(true);
+    }
+  }, [cartRefresh, dispatch]);
 
   const onClickRouteLogin = () => {
     history("/login");
