@@ -6,7 +6,7 @@ import Swal from "sweetalert2";
 
 function SingUpPage() {
   const navigate = useNavigate();
-  const userName= localStorage.getItem("name");
+  const userName = localStorage.getItem("name");
 
   if (userName) {
     Swal.fire({
@@ -40,6 +40,14 @@ function SingUpPage() {
   };
 
   const onSubmit = (e) => {
+    const emailPattern = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/.test(
+      user.email
+    );
+    const capitalLetter = /[A-Z]/.test(user.password);
+    const hasMinuscule = /[a-z]/.test(user.password);
+    const hasNumber = /[0-9]/.test(user.password);
+    const validLength = user.password.length >= 8;
+
     if (
       user.name.length === 0 ||
       user.email.length === 0 ||
@@ -49,6 +57,20 @@ function SingUpPage() {
       Swal.fire({
         title: "Error!",
         text: "Complete all fields",
+        icon: "error",
+        confirmButtonText: "Ok",
+      });
+    } else if (!emailPattern) {
+      Swal.fire({
+        title: "Error!",
+        text: "Invalid email",
+        icon: "error",
+        confirmButtonText: "Ok",
+      });
+    } else if (!capitalLetter || !hasMinuscule || !hasNumber || !validLength) {
+      Swal.fire({
+        title: "Error!",
+        text: "The password must have at least one lowercase letter, one uppercase letter, one number and a minimum of 8 characters.",
         icon: "error",
         confirmButtonText: "Ok",
       });
@@ -76,7 +98,7 @@ function SingUpPage() {
         .catch((err) => {
           Swal.fire({
             title: "Error!",
-            text: err.message,
+            text: "The email is already in use",
             icon: "error",
             confirmButtonText: "Ok",
           });
