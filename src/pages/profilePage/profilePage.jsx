@@ -66,15 +66,14 @@ function ProfilePage() {
 
   const onClickUpdateOrder = (i) => {
     axios
-      .put(`${axiosUrl}/api/orders/${i.id}`)
+      .put(`${axiosUrl}/api/orders/${i.orderId}`)
       .then((res) => {
+        setOrders(res.data);
         Swal.fire({
           title: "Success!",
           text: "You have successfully removed the order from the table!",
           icon: "success",
           confirmButtonText: "Ok",
-        }).then(() => {
-          setOrders(res.data);
         });
       })
       .catch((err) => {
@@ -86,8 +85,6 @@ function ProfilePage() {
         });
       });
   };
-
-  console.log(orders);
 
   return (
     <div>
