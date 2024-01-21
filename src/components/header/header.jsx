@@ -8,7 +8,7 @@ import Swal from "sweetalert2";
 
 function Header() {
   const cart = useSelector((state) => state.cart);
-  const storageID = localStorage.getItem("number");
+  const storageID = localStorage.getItem("name");
   const history = useNavigate();
   const [menu, setMenu] = useState(false);
   const dispatch = useDispatch();
@@ -31,11 +31,13 @@ function Header() {
     return location.pathname === ruta;
   });
 
+  const prueba = false;
+
   useEffect(() => {
-    if (storageID) {
+    if (storageID && prueba) {
       dispatch(getCarts());
     }
-  }, [cart, storageID, dispatch]);
+  }, [cart, storageID, dispatch, prueba]);
 
   const onClickRouteLogin = () => {
     history("/login");
