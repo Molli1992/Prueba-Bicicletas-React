@@ -1,8 +1,8 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import styles from "./header.module.css";
 import { Link, useNavigate, useLocation } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
-import { getCarts } from "../../redux/actions/index.js";
+//import { getCarts } from "../../redux/actions/index.js";
 import Button from "../button/button.jsx";
 import Swal from "sweetalert2";
 
@@ -32,11 +32,13 @@ function Header() {
     return location.pathname === ruta;
   });
 
+  /*
   useEffect(() => {
     if (storageID) {
       dispatch(getCarts());
     }
   }, [cart, storageID, dispatch]);
+  */
 
   const onClickRouteLogin = () => {
     history("/login");
