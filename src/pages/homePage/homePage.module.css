@@ -36,7 +36,7 @@
 }
 
 .containerCards {
-  padding: 40px 0px;
+  padding: 20px 0px;
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 10px;
@@ -48,6 +48,7 @@
   align-items: center;
   justify-content: center;
   gap: 20px;
+  margin-top: 5px;
 }
 
 .containerArrows p {
