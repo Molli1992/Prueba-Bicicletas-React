@@ -68,7 +68,7 @@ function Contacto() {
               <div className={styles.contactBox}>
                 <div className={styles.contactText}>
                   <h3>Mail</h3>
-                  <p>contact@booking.com</p>
+                  <p>contact@bikebazaar.com</p>
                 </div>
               </div>
             </div>
