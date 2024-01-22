@@ -100,7 +100,7 @@ function LoginPage() {
                           class="fw-normal mb-3 pb-3"
                           style={{ fontSize: "38px" }}
                         >
-                          Iniciar sesion
+                          Login
                         </h5>
 
                         <div class="form-outline mb-4">
