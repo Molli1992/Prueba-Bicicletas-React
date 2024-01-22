@@ -86,9 +86,9 @@ function HomePage() {
   const onClickAddToCart = (i) => {
     if (!userEmail) {
       Swal.fire({
-        title: "Error!",
+        title: "",
         text: "You must first login",
-        icon: "error",
+        icon: "",
         confirmButtonText: "Ok",
       });
     } else {

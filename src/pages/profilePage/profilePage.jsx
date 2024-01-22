@@ -9,9 +9,9 @@ function ProfilePage() {
 
   if (!userEmail) {
     Swal.fire({
-      title: "Error!",
+      title: "",
       text: "You must first login",
-      icon: "error",
+      icon: "",
       confirmButtonText: "Ok",
     }).then(() => {
       navigate("/");

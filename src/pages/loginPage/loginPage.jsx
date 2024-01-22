@@ -12,9 +12,9 @@ function LoginPage() {
 
   if (storageName) {
     Swal.fire({
-      title: "Error!",
+      title: "",
       text: "You are already logged in",
-      icon: "error",
+      icon: "",
       confirmButtonText: "Ok",
     }).then(() => {
       navigate("/");
@@ -36,9 +36,9 @@ function LoginPage() {
   const onSubmit = () => {
     if (login.email.length === 0 || login.password.length === 0) {
       Swal.fire({
-        title: "Error!",
-        text: "Complete all fields",
-        icon: "error",
+        title: "",
+        text: "Complete all fields to login",
+        icon: "",
         confirmButtonText: "Ok",
       });
     } else {
@@ -67,15 +67,6 @@ function LoginPage() {
           });
         });
     }
-  };
-
-  const onClick = () => {
-    Swal.fire({
-      title: "Error!",
-      text: "In repair",
-      icon: "error",
-      confirmButtonText: "Ok",
-    });
   };
 
   return (
@@ -154,27 +145,6 @@ function LoginPage() {
                           >
                             Sign up
                           </Link>
-                        </div>
-
-                        <p
-                          class="small text-muted"
-                          style={{ textDecoration: "none", cursor: "pointer" }}
-                          onClick={onClick}
-                        >
-                          Forget your password?
-                        </p>
-
-                        <div>
-                          <p
-                            class="small text-muted"
-                            style={{
-                              textDecoration: "none",
-                              cursor: "pointer",
-                            }}
-                            onClick={onClick}
-                          >
-                            Privacy Policy
-                          </p>
                         </div>
                       </form>
                     </div>

@@ -10,13 +10,12 @@ function SingUpPage() {
 
   if (userName) {
     Swal.fire({
-      title: "Error!",
+      title: "",
       text: "You are already logged in",
-      icon: "error",
+      icon: "",
       confirmButtonText: "Ok",
     }).then(() => {
       navigate("/");
-      window.scroll(0, 0);
     });
   }
 
@@ -55,30 +54,30 @@ function SingUpPage() {
       repeatPassword.length === 0
     ) {
       Swal.fire({
-        title: "Error!",
-        text: "Complete all fields",
-        icon: "error",
+        title: "",
+        text: "Complete all fields to register",
+        icon: "",
         confirmButtonText: "Ok",
       });
     } else if (!emailPattern) {
       Swal.fire({
-        title: "Error!",
+        title: "",
         text: "Invalid email",
-        icon: "error",
+        icon: "",
         confirmButtonText: "Ok",
       });
     } else if (!capitalLetter || !hasMinuscule || !hasNumber || !validLength) {
       Swal.fire({
-        title: "Error!",
+        title: "",
         text: "The password must have at least one lowercase letter, one uppercase letter, one number and a minimum of 8 characters.",
-        icon: "error",
+        icon: "",
         confirmButtonText: "Ok",
       });
     } else if (user.password !== repeatPassword) {
       Swal.fire({
-        title: "Error!",
+        title: "",
         text: "Password and Repeat your password must be the same",
-        icon: "error",
+        icon: "",
         confirmButtonText: "Ok",
       });
     } else {
@@ -94,11 +93,11 @@ function SingUpPage() {
             navigate("/login");
           });
         })
-        .catch((err) => {
+        .catch(() => {
           Swal.fire({
-            title: "Error!",
+            title: "",
             text: "The email is already in use",
-            icon: "error",
+            icon: "",
             confirmButtonText: "Ok",
           });
         });

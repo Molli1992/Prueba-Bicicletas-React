@@ -38,9 +38,9 @@ function CardDetailPage() {
   const onClickRouteCart = async () => {
     if (!userEmail) {
       Swal.fire({
-        title: "Error!",
-        text: "You must first login",
-        icon: "error",
+        title: "",
+        text: "You must first login!",
+        icon: "",
         confirmButtonText: "Ok",
       });
     } else {
@@ -76,9 +76,9 @@ function CardDetailPage() {
   const onClickAddToCart = () => {
     if (!userEmail) {
       Swal.fire({
-        title: "Error!",
+        title: "",
         text: "You must first login",
-        icon: "error",
+        icon: "",
         confirmButtonText: "Ok",
       });
     } else {

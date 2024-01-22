@@ -19,9 +19,9 @@ function Contacto() {
   const onSubmit = () => {
     if (state.name === "" || state.mail === "" || state.message === "") {
       Swal.fire({
-        title: "Error!",
-        text: "Complete all fields",
-        icon: "error",
+        title: "",
+        text: "Complete all the fields to send the message!",
+        icon: "",
         confirmButtonText: "Ok",
       });
     } else {
