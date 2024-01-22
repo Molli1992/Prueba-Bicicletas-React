@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import styles from "./slider.module.css";
-import img1 from "../../img/img-1-slider.jpg";
-import img2 from "../../img/img-2-slider.jpg";
-import img3 from "../../img//img-3-slider.jpg";
+import img1 from "../../img/img-slider-1.jpg";
+import img2 from "../../img/img-slider-2.jpg";
+import img3 from "../../img/img-slider-3.jpg";
 
 function Slider() {
   const [img, setImg] = useState(img1);

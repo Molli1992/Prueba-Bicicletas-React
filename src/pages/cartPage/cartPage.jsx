@@ -52,7 +52,7 @@ function CartPage() {
   const onClick = () => {
     Swal.fire({
       title: "Error!",
-      text: "In repair",
+      text: "Unable to make purchases, please try again later and sorry for the inconvenience.",
       icon: "error",
       confirmButtonText: "Ok",
     });
