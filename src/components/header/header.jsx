@@ -232,15 +232,15 @@ function Header() {
                 Sing Up
               </Link>
             ) : (
-              <Link
-                className={`${styles.linkHeader} ${styles.linkMenu}`}
+              <button
+                className={styles.buttonMenu}
                 onClick={() => {
                   logout();
                   onClickMenu();
                 }}
               >
                 Logout
-              </Link>
+              </button>
             )}
           </div>
         ) : null}

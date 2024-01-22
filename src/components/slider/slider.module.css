@@ -15,8 +15,9 @@
   text-align: center;
 }
 
-.body h1 {
+.containerImg h1 {
   color: #ffffff;
+  width: 590px;
 }
 
 @media screen and (max-width: 600px) {

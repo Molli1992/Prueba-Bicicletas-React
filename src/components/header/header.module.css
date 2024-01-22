@@ -125,6 +125,25 @@
   color: #003b95;
 }
 
+.buttonMenu {
+  font-weight: bold;
+  font-size: 20px;
+  width: 100%;
+  margin: 10px 0px;
+  padding: 5px;
+  box-sizing: border-box;
+  background-color: #003b95;
+  color: #ffffff;
+  border: none;
+  cursor: pointer;
+  text-align: left;
+}
+
+.buttonMenu:hover {
+  background-color: #ffffff;
+  color: #003b95;
+}
+
 @media screen and (max-width: 770px) {
   .leftContainer {
     width: 60%;
