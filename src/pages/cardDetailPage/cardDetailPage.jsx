@@ -39,7 +39,7 @@ function CardDetailPage() {
     if (!userEmail) {
       Swal.fire({
         title: "",
-        text: "You must first login!",
+        text: "You must first login",
         icon: "",
         confirmButtonText: "Ok",
       });
@@ -62,7 +62,7 @@ function CardDetailPage() {
             history("/cart");
           });
         })
-        .catch((err) => {
+        .catch(() => {
           Swal.fire({
             title: "Error!",
             text: "Product selection error try again later",
@@ -98,7 +98,7 @@ function CardDetailPage() {
             confirmButtonText: "Ok",
           });
         })
-        .catch((err) => {
+        .catch(() => {
           Swal.fire({
             title: "Error!",
             text: "Product selection error try again later",
