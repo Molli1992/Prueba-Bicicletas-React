@@ -120,7 +120,6 @@ function HomePage() {
   };
 
   if (products.length !== 0) {
-
     return (
       <div className={styles.body}>
         <Slider />

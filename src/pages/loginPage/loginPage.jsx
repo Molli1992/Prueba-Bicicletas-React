@@ -47,13 +47,13 @@ function LoginPage() {
         .then((res) => {
           localStorage.setItem("email", res.data.email);
           localStorage.setItem("name", res.data.name);
+          window.scroll(0, 0);
           Swal.fire({
             title: "Success!",
             text: "You have successfully logged in!",
             icon: "success",
             confirmButtonText: "Ok",
           }).then(() => {
-            window.scroll(0, 0);
             dispatch(getCarts());
             navigate("/");
           });

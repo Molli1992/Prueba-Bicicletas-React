@@ -34,7 +34,7 @@ function Footer() {
     <div className={styles.body}>
       <div className={styles.containerTop}>
         <Link className={styles.linkFooter} to={"/"} onClick={onClickScroll}>
-          BikeBazaar.com
+          BikeBazaar
         </Link>
         <p>Cycle the Extra Mile – Where Every Ride is an Adventure</p>
         <div className={styles.containerIcons}>
