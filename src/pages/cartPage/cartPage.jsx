@@ -49,13 +49,28 @@ function CartPage() {
       });
   };
 
-  const onClick = () => {
-    Swal.fire({
-      title: "Error!",
-      text: "Unable to make purchases, please try again later and sorry for the inconvenience.",
-      icon: "error",
-      confirmButtonText: "Ok",
-    });
+  const onClickBuyNow = () => {
+    axios
+      .delete(`${axiosUrl}/api/allCarts/${userEmail}`)
+      .then(() => {
+        dispatch(getCarts());
+        Swal.fire({
+          title: "Success!",
+          text: "Successful purchase!",
+          icon: "success",
+          confirmButtonText: "Ok",
+        }).then(() => {
+          navigate("/");
+        });
+      })
+      .catch(() => {
+        Swal.fire({
+          title: "Error!",
+          text: "Error when making purchase",
+          icon: "error",
+          confirmButtonText: "Ok",
+        });
+      });
   };
 
   const onClickCleanCart = () => {
@@ -110,7 +125,7 @@ function CartPage() {
           })}
 
         <div className={styles.containerButton}>
-          <Button OnClick={onClick} Value="Buy now" />
+          <Button OnClick={onClickBuyNow} Value="Buy now" />
           <Button OnClick={onClickCleanCart} Value="Clean cart" />
           <p>Final price: ${count}</p>
         </div>
