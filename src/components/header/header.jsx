@@ -61,15 +61,14 @@ function Header() {
   };
 
   const logout = () => {
+    history("/");
     localStorage.clear();
     Swal.fire({
       title: "Success!",
       text: "You have successfully logged out",
       icon: "success",
       confirmButtonText: "Ok",
-    }).then(() => {
-      history("/");
-    });
+    })
   };
 
   const onClickMenu = () => {
