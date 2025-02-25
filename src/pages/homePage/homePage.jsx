@@ -130,6 +130,83 @@ function HomePage() {
           <input placeholder="Search your bicycle..." onChange={handleFilter} />
 
           {!filterActive ? (
+            <div className={styles.containerCards}>
+              {cards === 1 &&
+                products &&
+                products.map((i, index) => {
+                  if (index > 5) {
+                    return null;
+                  } else {
+                    return (
+                      <CardProducts
+                        Img={i.img}
+                        Name={i.name}
+                        Year={i.year}
+                        Price={i.price}
+                        OnClickDetail={() => OnClickDetail(i)}
+                        OnClickCart={() => onClickAddToCart(i)}
+                      />
+                    );
+                  }
+                })}
+
+              {cards === 2 &&
+                products &&
+                products.map((i, index) => {
+                  if (index > 5 && index < 12) {
+                    return (
+                      <CardProducts
+                        Img={i.img}
+                        Name={i.name}
+                        Year={i.year}
+                        Price={i.price}
+                        OnClickDetail={() => OnClickDetail(i)}
+                        OnClickCart={() => onClickAddToCart(i)}
+                      />
+                    );
+                  } else {
+                    return null;
+                  }
+                })}
+
+              {cards === 3 &&
+                products &&
+                products.map((i, index) => {
+                  if (index > 11) {
+                    return (
+                      <CardProducts
+                        Img={i.img}
+                        Name={i.name}
+                        Year={i.year}
+                        Price={i.price}
+                        OnClickDetail={() => OnClickDetail(i)}
+                        OnClickCart={() => onClickAddToCart(i)}
+                      />
+                    );
+                  } else {
+                    return null;
+                  }
+                })}
+            </div>
+          ) : (
+            <div className={styles.containerCards}>
+              {filter &&
+                filter.map((i) => {
+                  return (
+                    <CardProducts
+                      Img={i.img}
+                      Name={i.name}
+                      Year={i.year}
+                      Price={i.price}
+                      OnClickDetail={(i) => OnClickDetail(i)}
+                      OnClickCart={() => onClickAddToCart(i)}
+                    />
+                  );
+                })}
+            </div>
+          )}
+
+          {!filterActive ? (
             <div className={styles.containerArrows}>
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -164,83 +241,6 @@ function HomePage() {
               </svg>
             </div>
           ) : null}
-
-          {!filterActive ? (
-            <div className={styles.containerCards}>
-              {cards === 1 &&
-                products &&
-                products.map((i, index) => {
-                  if (index > 5) {
-                    return null;
-                  } else {
-                    return (
-                      <CardProducts
-                        Img={i.img}
-                        Name={i.name}
-                        Year={i.year}
-                        Price={i.price}
-                        OnClickDetail={() => OnClickDetail(i)}
-                        OnClickCart={() => onClickAddToCart(i)}
-                      />
-                    );
-                  }
-                })}
-
-              {cards === 2 &&
-                products &&
-                products.map((i, index) => {
-                  if (index > 5 && index < 12) {
-                    return (
-                      <CardProducts
-                        Img={i.img}
-                        Name={i.name}
-                        Year={i.year}
-                        Price={i.price}
-                        OnClickDetail={(i) => OnClickDetail(i)}
-                        OnClickCart={() => onClickAddToCart(i)}
-                      />
-                    );
-                  } else {
-                    return null;
-                  }
-                })}
-
-              {cards === 3 &&
-                products &&
-                products.map((i, index) => {
-                  if (index > 11) {
-                    return (
-                      <CardProducts
-                        Img={i.img}
-                        Name={i.name}
-                        Year={i.year}
-                        Price={i.price}
-                        OnClickDetail={(i) => OnClickDetail(i)}
-                        OnClickCart={() => onClickAddToCart(i)}
-                      />
-                    );
-                  } else {
-                    return null;
-                  }
-                })}
-            </div>
-          ) : (
-            <div className={styles.containerCards}>
-              {filter &&
-                filter.map((i) => {
-                  return (
-                    <CardProducts
-                      Img={i.img}
-                      Name={i.name}
-                      Year={i.year}
-                      Price={i.price}
-                      OnClickDetail={(i) => OnClickDetail(i)}
-                      OnClickCart={() => onClickAddToCart(i)}
-                    />
-                  );
-                })}
-            </div>
-          )}
         </div>
 
         <ContactUs />
