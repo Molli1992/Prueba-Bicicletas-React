@@ -129,6 +129,14 @@ function HomePage() {
 
           <input placeholder="Search your bicycle..." onChange={handleFilter} />
 
+          {products.length ? null : (
+            <div
+              class="spinner-border text-primary"
+              role="status"
+              style={{ height: "75px", width: "75px", marginTop: "20px" }}
+            ></div>
+          )}
+
           {!filterActive ? (
             <div className={styles.containerCards}>
               {cards === 1 &&
